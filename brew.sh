@@ -17,6 +17,8 @@ brew install mutt
 brew install keybase
 # GPG
 brew install gnupg2
+# TIG
+brew install tig
 # Fun stuff
 brew install sl
 brew install fortune
