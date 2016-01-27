@@ -1,0 +1,264 @@
+Before software can be reusable it first has to be usable.
+ - Ralph Johnson
+%
+I think Microsoft named .NET so it wouldn’t show up in a Unix directory listing.
+ - Oktal
+%
+Without requirements or design, programming is the art of adding bugs to an
+empty text file.
+ - Louis Srygley
+%
+// sometimes I believe compiler ignores all my comments
+%
+Walking on water and developing software from a specification are easy if both
+are frozen.
+ - Edward V. Berard
+%
+Software is like sex; it's better when it's free.
+ - Linus Torvalds
+%
+Give a man a program, frustrate him for a day. Teach a man to program, frustrate
+him for a lifetime.
+ - Muhammad Waseem
+%
+Programs must be written for people to read, and only incidentally for machines
+to execute.
+ - Hal Abelson
+%
+It’s not a bug - it’s an undocumented feature.
+%
+Deleted code is debugged code.
+ - Jeff Sickel
+%
+If debugging is the process of removing software bugs, then programming must be
+the process of putting them in.
+ - Edsger Dijkstra
+%
+In order to understand recursion, one must first understand recursion.
+%
+Debugging is twice as hard as writing the code in the first place. Therefore,
+if you write the code as cleverly as possible, you are, by definition, not smart
+enough to debug it.
+ - Brian W. Kernighan
+%
+Any fool can write code that a computer can understand. Good programmers write
+code that humans can understand.
+ - Martin Fowler
+%
+One of my most productive days was throwing away 1000 lines of code.
+ - Ken Thompson
+%
+// hack for ie browser (assuming that ie is a browser)
+%
+// If this code works, it was written by Paul DiLascia. If not, I don't know who
+wrote it
+%
+//When I wrote this, only God and I understood what I was doing
+//Now, God only knows
+%
+#define TRUE FALSE
+//Happy debugging suckers
+%
+#define if(x) if(!(x))
+%
+#define if while
+%
+/**
+ * Always returns true.
+ **/
+public boolean isAvailable() {
+	return false;
+}
+%
+/////////////////////////////////////// this is a well commented line
+%
+/* IF DOLPHINS ARE SO SMART, HOW COME THEY LIVE IN IGLOOS? */
+%
+// This comment is self explanatory.
+%
+Replace a semicolon (;) with a greek question mark (;) in someone's JavaScript
+and then just sit back and watch.
+ - Bob Rains
+%
+stop(); // Hammertime!
+%
+return 1; # returns 1
+%
+/**
+* For the brave souls who get this far: You are the chosen ones,
+* the valiant knights of programming who toil away, without rest,
+* fixing our most awful code. To you, true saviors, kings of men,
+* I say this: never gonna give you up, never gonna let you down,
+* never gonna run around and desert you. Never gonna make you cry,
+* never gonna say goodbye. Never gonna tell a lie and hurt you.
+*/
+%
+// 
+// Dear maintainer:
+// 
+// Once you are done trying to 'optimize' this routine,
+// and have realized what a terrible mistake that was,
+// please increment the following counter as a warning
+// to the next guy:
+// 
+// total_hours_wasted_here = 42
+// 
+%
+Java is to JavaScript what Car is to Carpet.
+ - Chris Heilmann
+%
+Should array indices start at 0 or 1? My compromise of 0.5 was rejected without,
+I thought, proper consideration.
+ - Stan Kelly-Bootle
+%
+It always takes longer than you expect, even when you take into account
+Hofstadter's Law.
+ - Hofstadter's Law
+%
+In theory, there is no difference between theory and practice.
+But, in practice, there is.
+ - Jan L. A. van de Snepscheut
+%
+If Java had true garbage collection, most programs would delete themselves upon
+execution.
+ - Robert Sewell
+%
+There are only two kinds of languages:
+the ones people complain about and the ones nobody uses.
+ - Bjarne Stroustrup
+%
+Il semble que la perfection soit atteinte non quand il n'y a plus rien à
+ajouter, mais quand il n'y a plus rien à retrancher.
+ - Antoine de Saint-Exupéry
+%
+A clever person solves a problem. A wise person avoids it.
+ - Albert Einstein
+%
+I don't care if it works on your machine! We are not shipping your machine!
+ - Vidiu Platon
+%
+It takes a considerable amount of effort to learn Vim.
+It takes twice as much to unlearn it.
+ - john2x
+%
+A programmer is a device for turning caffeine into code.
+%
+EMACS - "Escape Meta Alt Control Shift"
+%
+Emacs is a pretty good operating system, but it could use a better text editor.
+%
+Step back! I have a void pointer, and I'm not afraid to use it!
+%
+Java: write once, run away!
+%
+I had a problem and used Java. Now I have a ProblemFactory.
+%
+Why do Java developers wear glasses?
+
+    Because they don't C#.
+%
+Profanity is one language all programmers know best.
+%
+There's always one more bug.
+ - Troutman's Laws of Computer Programming, n.17
+%
+Programming is an art form that fights back.
+%
+Real Programmers always confuse Christmas and Halloween because Oct31 == Dec25.
+ - Andrew Rutherford
+%
+There are two ways to write error-free programs; only the third one works.
+ - Alan Perlis
+%
+If debugging is the process of removing bugs, then programming must be the
+process of putting them in.
+ - Edsger W. Dijkstra
+%
+As of next week, passwords will be entered in Morse code.
+%
+The fortune '$ rm -r $HOME' could be extremely unsettling!!
+%
+recursion (re - cur' - zhun) n. 1. (see recursion)
+%
+Congratulations! You have now used up another 250 hours of CPU time.
+%
+Any A.I. smart enough to pass a Turing test is smart enough to know to fail it.
+ - Ian McDonald
+%
+If anything can go wrong, it will.
+ - Murphy's First Law
+%
+It won't work.
+ - Jenkinson's Law
+%
+It works better if you plug it in.
+ - Sattinger's Law
+%
+The probability of anything happening is in inverse ratio to its desirability.
+ - Gumperson's Law
+%
+// TODO: I believe the method (and the class in general)
+// doesn’t make any sense at all, but I’m sleepy and
+// it works fine
+%
+// I have absolutely no idea, why it becomes a
+// 2-dimensional array … so working around instead
+// of solving
+$css = $css[0];
+%
+foo.bar = foo.bar;
+%
+/*
+ * Uh oh. Still here. Where’s the kaboom? There was supposed
+ * to be an EARTH-shattering kaboom!
+ *
+ * Oh well, log the failure and error out.
+ */
+%
+/* opendir(), readdir(), closedir() for those systems which don’t have them.
+If anyone ever uses this code let me know so I can open a bottle of champagne
+or something */
+%
+// Yes, this is the wrong way to build an XML file.
+// But you know what? It works, and we still have time
+// to go out for drinks after this is built.
+%
+# I should also comment that I like pink, but don't tell anybody
+%
+# If you understand how these functions work, let me know.
+# I haven’t got the slighest idea anymore :-)
+%
+// here be dragons
+%
+Did you try turning it on and off again?
+%
+The 6 stages of debugging
+
+1. That can't happen.
+2. That doesn't happen on my machine.
+3. That shouldn't happen.
+4. Why does that happen?
+5. Oh, I see.
+6. How did that ever work?
+%
+  _
+ //\
+ V  \
+  \  \_         DON'T LOOK AT ME
+   \,'.`-.       I'M IRRELEVANT
+    \ `. `.
+     ( \  `. `-.                        _,.-:\
+      \ \   `.  `-._             __..--' ,-';/
+       \ `.   `-.   `-..___..---'   _.--' ,'/
+        `. `.    `-._        __..--'    ,' /
+          `. `-_     ``--..''       _.-' ,'
+            `-_ `-.___        __,--'   ,'
+               `-.__  `----"""    __.-'
+                    `--..____..--'
+%
+First Law of Software Quality
+
+e=mc^2
+errors=(more code)^2
+%
+what idiot called them product managers instead of feature creeps?
