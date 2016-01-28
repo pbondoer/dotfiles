@@ -94,7 +94,7 @@ set undolevels=1000 " (lots)
 
 " essential: commands
 set wildmenu " allow TAB-completion in commands
-set wildignore=swp,
+set wildignore=*.swp,*.o,.git,*~ " ignore pattern for wildcards
 set showcmd " display current command
 set cmdheight=2 " use 2 spaces for the
 set notimeout ttimeout ttimeoutlen=200 " 200ms timeout
