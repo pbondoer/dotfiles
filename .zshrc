@@ -38,7 +38,7 @@ echo ""
 if [ -f ~/.reminders ]
 then
 	reminder_lines=`wc -l < ~/.reminders | tr -d ' \t\n\r\f'`
-	echo "[$reminder_lines] You have reminders"
+	echo "--- You have [$reminder_lines] reminders"
 	while read line; do
 		echo "*" $line
 	done < ~/.reminders
