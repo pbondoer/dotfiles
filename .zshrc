@@ -21,7 +21,7 @@ bindkey "^[[3~" delete-char
 # variables
 export MAIL="$USER@student.42.fr"
 export PROMPT=' %B%n%b@%U%m%u:%S%c%s%{$fg[yellow]%}${vcs_info_msg_0_} %{$reset_color%}%# '
-export RPROMPT="%t"
+export RPROMPT='%t'
 export PATH="$HOME/.brew/bin:$PATH"
 export EDITOR="vim"
 
@@ -34,6 +34,16 @@ fortune ~/fortune
 #gshuf -n 1 .quotes | sed 's/\\n/\'$'\n/g'
 #cat .quotes | perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);' | tail -1 | sed 's/\\n/\'$'\n/g'
 echo ""
+# reminders
+if [ -f ~/.reminders ]
+then
+	reminder_lines=`wc -l < ~/.reminders | tr -d ' \t\n\r\f'`
+	echo "[$reminder_lines] You have reminders"
+	while read line; do
+		echo "*" $line
+	done < ~/.reminders
+	echo ""
+fi
 
 # gpg alias
 alias gpg=gpg2
