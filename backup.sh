@@ -33,7 +33,7 @@ printf "// backup.sh //\n"
 # Count the amount of backups
 BACKUPS=`find $BACKUP_BASEDIR/* -maxdepth 0 -type d | wc -l | tr -d ' '`
 printf "Found $BACKUPS existing backups\n"
-TODAY=`date +%d-%m-%y/%H-%M`
+TODAY=`date +%d-%m-%y/%Hh%M`
 DIR=$BACKUP_BASEDIR/$TODAY
 printf "Destination directory is $DIR\n\n"
 
@@ -97,7 +97,7 @@ done < $BASEDIR/.backup
 
 # Check the filesize and display it at the end of the script
 log $INFO "\nChecking file size...\n"
-size=`du -s -h $DIR | cut -d '/' -f1 | tr -d '\t'`
+size=`du -s -h $DIR | cut -d $'\t' -f1`
 if [ ! $? -eq 0 ]
 then
 	size='unknown'
