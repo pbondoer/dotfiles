@@ -15,6 +15,12 @@ precmd() {
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git*' formats " (%b)"
 
+# zsh zstyle options
+# activate menu selection
+zstyle ':completion:*' menu select
+# let's use the tag name as group name
+zstyle ':completion:*' group-name ''
+
 # fix del key
 bindkey "^[[3~" delete-char
 
