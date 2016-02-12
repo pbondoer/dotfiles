@@ -11,6 +11,8 @@ brew install homebrew/dupes/grep
 # brew install homebrew/dupes/screen
 # brew install homebrew/php/php56 --with-gmp
 
+# UPX
+brew install upx
 # Mutt e-mail client
 brew install mutt
 # Keybase.io
