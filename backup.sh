@@ -17,6 +17,7 @@ ERROR=$RED
 INFO=$CYAN
 FILE=$YELLOW
 SUCCESS=$GREEN
+TITLE=$MAGENTA
 
 # Configuration
 BASEDIR=~
@@ -27,8 +28,7 @@ log() {
 	printf "$2"
 }
 
-tput setaf $MAGENTA
-printf "// backup.sh //\n"
+log $TITLE "// backup.sh //\n"
 
 # Count the amount of backups
 BACKUPS=`find $BACKUP_BASEDIR/* -maxdepth 0 -type d | wc -l | tr -d ' '`
@@ -97,7 +97,7 @@ done < $BASEDIR/.backup
 
 # Check the filesize and display it at the end of the script
 log $INFO "\nChecking file size...\n"
-size=`du -s -h $DIR | cut -d $'\t' -f1`
+size=`du -s -h $DIR | cut -d $'\t' -f1 | tr -d ' '`
 if [ ! $? -eq 0 ]
 then
 	size='unknown'

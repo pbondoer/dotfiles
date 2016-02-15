@@ -7,20 +7,16 @@ brew upgrade --all
 # Vim and other OSX tools
 brew install vim --override-system-vi
 brew install homebrew/dupes/grep
-# brew install homebrew/dupes/openssh
-# brew install homebrew/dupes/screen
-# brew install homebrew/php/php56 --with-gmp
 
-# UPX
-brew install upx
-# Mutt e-mail client
-brew install mutt
-# Keybase.io
-brew install keybase
-# GPG
-brew install gnupg2
-# TIG
-brew install tig
+# Tools
+brew install valgrind
+brew install upx # Ultimate Packer for eXecutables
+brew install mutt # terminal e-mail client
+brew install keybase # keybase.io client
+brew install gnupg2 # GPG
+brew install tig # TIG
+
 # Fun stuff
 brew install sl
 brew install fortune
+brew install cowsay
