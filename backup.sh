@@ -1,5 +1,3 @@
-#!/bin/sh
-
 # backup.sh - Simple backup script
 # @author pbondoer
 # @license CC0 - https://creativecommons.org/publicdomain/zero/1.0
@@ -33,7 +31,7 @@ log() {
 log $TITLE "// backup.sh //\n"
 
 # Count the amount of backups
-BACKUPS=`find $BACKUP_BASEDIR/* -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' '`
+BACKUPS=`find $BACKUP_BASEDIR/* -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l | tr -d ' '`
 printf "Found $BACKUPS existing backups\n"
 TODAY=`date +%d-%m-%y/%Hh%M`
 DIR=$BACKUP_BASEDIR/$TODAY
