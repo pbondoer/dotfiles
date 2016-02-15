@@ -43,6 +43,8 @@ defaults write -g com.apple.mouse.scaling 3
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 # Disable smart dashes as they’re annoying when typing code
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+# Disable text replacement
+defaults write NSGlobalDomain NSAutomaticTextReplacementEnabled -bool false
 # Disable “natural” scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 # Enable full keyboard access for all controls
