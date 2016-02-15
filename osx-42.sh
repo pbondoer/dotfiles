@@ -35,6 +35,8 @@ log $TITLE "This might take a little while.\n"
 log $CATEGORY "OSX preferences"
 
 log $STEP "Keyboard and mouse"
+# Enable right-click
+defaults write com.apple.driver.AppleHIDMouse Button2 -int 2
 # Set mouse speed to 3
 defaults write -g com.apple.mouse.scaling 3
 # Disable smart quotes as they’re annoying when typing code
@@ -127,6 +129,8 @@ defaults write com.apple.dock wvous-tl-corner -int 0
 defaults write com.apple.dock wvous-tr-corner -int 0
 defaults write com.apple.dock wvous-bl-corner -int 0
 defaults write com.apple.dock wvous-br-corner -int 0
+# Use 12-hour time
+defaults write NSGlobalDomain AppleICUForce12HourTime -bool true
 
 log $STEP "Screenshots"
 # Save screenshots to a inside ~/screenshots
@@ -147,8 +151,7 @@ log $STEP "Finder"
 # Finder: disable window animations and Get Info animations
 defaults write com.apple.finder DisableAllAnimations -bool true
 # Set ~ as the default location for new Finder windows
-defaults write com.apple.finder NewWindowTarget -string "PfLo"
-defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
 # Show icons for hard drives, servers, and removable media on the desktop
 defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
 defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
@@ -206,6 +209,8 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 	General -bool true \
 	OpenWith -bool true \
 	Privileges -bool true
+# Enable text selection in QuickLook
+defaults write com.apple.finder QLEnableTextSelection -bool true
 
 log $STEP "Dock"
 # Set the icon size of Dock items to 64 pixels
@@ -235,6 +240,8 @@ defaults write com.apple.dashboard mcx-disabled -bool true
 defaults write com.apple.dock dashboard-in-overlay -bool true
 # Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
+# Set dock to bottom of the screen
+defaults write com.apple.dock orientation -string "bottom"
 
 log $STEP "Terminal"
 # Only use UTF-8 in Terminal.app
@@ -253,6 +260,10 @@ defaults write com.apple.ActivityMonitor IconType -int 5
 defaults write com.apple.ActivityMonitor ShowCategory -int 0
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+log $STEP "Archive Utility"
+# Move archives to trash after extracting
+defaults write com.apple.archiveutility "dearchive-move-after" -string "~/.Trash"
 
 log $STEP "TextEdit"
 # Use plain text mode for new TextEdit documents
@@ -279,6 +290,11 @@ log $STEP "iTerm 2"
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 
+log $STEP "XCode"
+# Always use tabs for indenting
+defaults write com.apple.dt.Xcode DVTTextIndentUsingTabs -bool true
+# Show tab bar
+defaults write com.apple.dt.Xcode AlwaysShowTabBar -bool true
 
 log $TITLE "\nDone. Please relog to make apply all changes!"
 log $TITLE "Thanks for all the fish! ><>"
