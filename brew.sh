@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Use latest Homebrew
 brew update
 
