@@ -54,6 +54,8 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain KeyRepeat -int 0
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+# Disable spell checking
+defaults write -g WebContinuousSpellCheckingEnabled -bool false
 # Delete default keyboard layouts
 defaults delete com.apple.HIToolbox AppleEnabledInputSources
 # Use U.S. international keyboard layout
@@ -134,7 +136,7 @@ defaults write NSGlobalDomain AppleICUForce12HourTime -bool true
 
 log $STEP "Screenshots"
 # Save screenshots to a inside ~/screenshots
-mkdir $HOME/screenshots
+mkdir -p $HOME/screenshots
 defaults write com.apple.screencapture location -string "${HOME}/screenshots"
 # Save screenshots in PNG format (other options: BMP, GIF, JPG, PDF, TIFF)
 defaults write com.apple.screencapture type -string "png"
@@ -215,6 +217,8 @@ defaults write com.apple.finder QLEnableTextSelection -bool true
 log $STEP "Dock"
 # Set the icon size of Dock items to 64 pixels
 defaults write com.apple.dock tilesize -int 64
+# Disable icon magnification
+defaults write com.apple.dock largesize -float 64
 # Change minimize/maximize window effect
 defaults write com.apple.dock mineffect -string "scale"
 # Minimize windows into their application’s icon
@@ -240,8 +244,9 @@ defaults write com.apple.dashboard mcx-disabled -bool true
 defaults write com.apple.dock dashboard-in-overlay -bool true
 # Don’t automatically rearrange Spaces based on most recent use
 defaults write com.apple.dock mru-spaces -bool false
-# Set dock to bottom of the screen
+# Set dock to bottom middle of the screen
 defaults write com.apple.dock orientation -string "bottom"
+defaults write com.apple.dock pinning -string middle
 
 log $STEP "Terminal"
 # Only use UTF-8 in Terminal.app
