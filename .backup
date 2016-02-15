@@ -1,8 +1,10 @@
+.backup
+backup.sh
 .zshrc
 .vimrc
+.reminders
 projects/
+github/
 Desktop/
 Downloads/
 fortune/
-github/
-planning
