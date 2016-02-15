@@ -41,7 +41,7 @@ defaults write -g com.apple.mouse.scaling 3
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 # Disable smart dashes as they’re annoying when typing code
 defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
-# Disable “natural” (Lion-style) scrolling
+# Disable “natural” scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs)
@@ -52,6 +52,14 @@ defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
 defaults write NSGlobalDomain KeyRepeat -int 0
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+# Delete default keyboard layouts
+defaults delete com.apple.HIToolbox AppleEnabledInputSources
+# Use U.S. international keyboard layout
+defaults write com.apple.HIToolbox AppleCurrentKeyboardLayoutInputSourceID "com.apple.keylayout.USInternational-PC"
+defaults write com.apple.HIToolbox AppleDefaultAsciiInputSource -dict InputSourceKind "Keyboard Layout" "KeyboardLayout ID" -int 15000 "KeyboardLayout Name" "USInternational-PC"
+defaults write com.apple.HIToolbox AppleEnabledInputSources -array '{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 15000; "KeyboardLayout Name" = "USInternational-PC"; }'
+defaults write com.apple.HIToolbox AppleInputSourceHistory -array '{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 15000; "KeyboardLayout Name" = "USInternational-PC"; }'
+defaults write com.apple.HIToolbox AppleSelectedInputSources -array '{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 15000; "KeyboardLayout Name" = "USInternational-PC"; }'
 
 log $STEP "User interface"
 # Enable Dark mode
