@@ -81,8 +81,8 @@ set ignorecase " ignore case when searching, needed for next option
 set smartcase " smart-case searching
 
 " essential: backup, swap, undo, autosave
-set backupdir=~/.vim/backups
-set directory=~/.vim/swaps
+set backupdir=~/.vim/backup
+set directory=~/.vim/swap
 if exists("&undodir")
 	set undodir=~/.vim/undo
 endif
