@@ -32,8 +32,11 @@ export PATH="$HOME/.brew/bin:$PATH"
 export EDITOR="vim"
 
 # brew: use proper caches dir
-mkdir -p ~/Library/Caches/Homebrew
-export HOMEBREW_CACHE=~/Library/Caches/Homebrew
+mkdir -p /tmp/Caches/Homebrew
+export HOMEBREW_CACHE=/tmp/Caches/Homebrew
+# brew: use tmp for temp
+mkdir -p /tmp/Homebrew
+export HOMEBREW_TEMP=/tmp/Homebrew
 
 # fortune
 fortune ~/fortune
