@@ -20,7 +20,8 @@ Plug 'altercation/vim-colors-solarized'
 Plug 'airblade/vim-gitgutter'
 " [plugin] line plugins
 Plug 'bling/vim-bufferline'
-Plug 'Bling/vim-airline'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 0
 " [plugin] extra
 " Plug 'szw/vim-ctrlspace'
