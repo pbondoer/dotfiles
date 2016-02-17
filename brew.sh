@@ -1,24 +1,34 @@
 #!/bin/sh
 
+GREEN=2
+YELLOW=3
+
+log() {
+	tput setaf $1
+	printf "$2\n"
+}
+
+# Use proper directories
+export HOMEBREW_CACHE=/tmp/Homebrew/Caches
+export HOMEBREW_TEMP=/tmp/Homebrew/Temp
+
+mkdir -p $HOMEBREW_CACHE
+mkdir -p $HOMEBREW_TEMP
+
 # Use latest Homebrew
-brew update
+log $GREEN "Updating..."
+brew update > /dev/null
 
 # Upgrade scripts
-brew upgrade --all
+log $GREEN "Upgrading..."
+brew upgrade --all > /dev/null
 
-# Vim and other OSX tools
-brew install vim --override-system-vi
-brew install homebrew/dupes/grep
+# Install
+count=`wc -l < brew_list | tr -d ' '`
+log $GREEN "Installing $count packages..."
 
-# Tools
-brew install valgrind
-brew install upx # Ultimate Packer for eXecutables
-brew install mutt # terminal e-mail client
-brew install keybase # keybase.io client
-brew install gnupg2 # GPG
-brew install tig # TIG
-
-# Fun stuff
-brew install sl
-brew install fortune
-brew install cowsay
+while read package
+do
+	log $YELLOW "$package"
+	brew install $package
+done < brew_list

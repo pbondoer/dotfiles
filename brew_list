@@ -1,0 +1,11 @@
+ vim --override-system-vi
+ homebrew/dupes/grep
+ valgrind
+ upx
+ mutt
+ keybase
+ gnupg2
+ tig
+ sl
+ fortune
+ cowsay

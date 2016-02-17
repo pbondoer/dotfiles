@@ -22,12 +22,8 @@ log() {
 	printf "$2\n"
 }
 
-TITLE=$MAGENTA
 STEP=$YELLOW
 CATEGORY=$GREEN
-
-log $TITLE "Configuring session for $USER..."
-log $TITLE "This might take a little while.\n"
 
 # -----------------------------------------------------------------------------
 # OSX preferences
@@ -58,8 +54,6 @@ defaults write NSGlobalDomain KeyRepeat -int 0
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # Disable spell checking
 defaults write -g WebContinuousSpellCheckingEnabled -bool false
-# Delete default keyboard layouts
-defaults delete com.apple.HIToolbox AppleEnabledInputSources
 # Use U.S. international keyboard layout
 defaults write com.apple.HIToolbox AppleCurrentKeyboardLayoutInputSourceID "com.apple.keylayout.USInternational-PC"
 defaults write com.apple.HIToolbox AppleDefaultAsciiInputSource -dict InputSourceKind "Keyboard Layout" "KeyboardLayout ID" -int 15000 "KeyboardLayout Name" "USInternational-PC"
@@ -302,6 +296,3 @@ log $STEP "XCode"
 defaults write com.apple.dt.Xcode DVTTextIndentUsingTabs -bool true
 # Show tab bar
 defaults write com.apple.dt.Xcode AlwaysShowTabBar -bool true
-
-log $TITLE "\nDone. Please relog to make apply all changes!"
-log $TITLE "Thanks for all the fish! ><>"
