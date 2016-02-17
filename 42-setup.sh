@@ -41,8 +41,11 @@ cp .vimrc ~
 # vim-plug
 mkdir -p ~/.vim/plugged
 mkdir -p ~/.vim/autoload
-curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim
-vim -c "PlugInstall"
+curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/master/plug.vim &> /dev/null
+vim -c "PlugInstall" -c "q!" &> /dev/null
+# header
+mkdir -p ~/.vim/plugin
+curl -fLo ~/.vim/plugin/42header.vim https://raw.github.com/pbondoer/vim-42header/master/42header.vim &> /dev/null
 
 log $STEP "Git"
 git config --global push.default simple
