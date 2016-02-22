@@ -66,7 +66,8 @@ set copyindent " copy indent from previous lines
 set shiftround " use multiple of shiftwidth when indenting with < and >
 
 " essential: display
-set ruler " display a ruler under current line
+set ruler " display a ruler in the status line
+set cursorline " highlight current line
 set number " show line numbers
 set colorcolumn=80 " display a column at 80
 set list " show invisible characters, see next option
