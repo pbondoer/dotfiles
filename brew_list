@@ -1,6 +1,7 @@
  vim --override-system-vi
  homebrew/dupes/grep
  valgrind
+ gist
  upx
  mutt
  keybase
