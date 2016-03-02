@@ -55,11 +55,13 @@ defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 # Disable spell checking
 defaults write -g WebContinuousSpellCheckingEnabled -bool false
 # Use U.S. international keyboard layout
+defaults delete com.apple.HIToolbox AppleEnabledInputSources
 defaults write com.apple.HIToolbox AppleCurrentKeyboardLayoutInputSourceID "com.apple.keylayout.USInternational-PC"
 defaults write com.apple.HIToolbox AppleDefaultAsciiInputSource -dict InputSourceKind "Keyboard Layout" "KeyboardLayout ID" -int 15000 "KeyboardLayout Name" "USInternational-PC"
 defaults write com.apple.HIToolbox AppleEnabledInputSources -array '{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 15000; "KeyboardLayout Name" = "USInternational-PC"; }'
 defaults write com.apple.HIToolbox AppleInputSourceHistory -array '{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 15000; "KeyboardLayout Name" = "USInternational-PC"; }'
 defaults write com.apple.HIToolbox AppleSelectedInputSources -array '{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 15000; "KeyboardLayout Name" = "USInternational-PC"; }'
+killall SystemUIServer
 
 log $STEP "User interface"
 # Enable Dark mode
@@ -129,6 +131,21 @@ defaults write com.apple.dock wvous-bl-corner -int 0
 defaults write com.apple.dock wvous-br-corner -int 0
 # Use 12-hour time
 defaults write NSGlobalDomain AppleICUForce12HourTime -bool true
+# Disable AirDrop
+defaults write com.apple.NetworkBrowser DisableAirDrop -bool YES
+# Turn off WiFi
+networksetup -setairportpower en1 off > /dev/null
+# Hide all icons except clock and volume
+defaults write ~/Library/Preferences/ByHost/com.apple.systemuiserver.*
+dontAutoLoad -array \
+	"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+	"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+	"/System/Library/CoreServices/Menu Extras/User.menu" \
+	"/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+	"/System/Library/CoreServices/Menu Extras/TextInput.menu"
+defaults write com.apple.systemuiserver menuExtras -array \
+	"/System/Library/CoreServices/Menu Extras/Volume.menu" \
+	"/System/Library/CoreServices/Menu Extras/Clock.menu"
 
 log $STEP "Screenshots"
 # Save screenshots to a inside ~/screenshots
