@@ -136,8 +136,7 @@ defaults write com.apple.NetworkBrowser DisableAirDrop -bool YES
 # Turn off WiFi
 networksetup -setairportpower en1 off > /dev/null
 # Hide all icons except clock and volume
-defaults write ~/Library/Preferences/ByHost/com.apple.systemuiserver.*
-dontAutoLoad -array \
+defaults write ~/Library/Preferences/ByHost/com.apple.systemuiserver.* dontAutoLoad -array \
 	"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
 	"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
 	"/System/Library/CoreServices/Menu Extras/User.menu" \
