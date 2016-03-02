@@ -26,6 +26,7 @@ log $TITLE "This might take a little while.\n"
 log $STEP "Configuration files"
 cp .zshrc ~
 touch ~/.hushlogin
+ln -shf /sgoinfre/goinfre/Perso/$USER ~/sgoinfre
 
 log $STEP "OSX"
 sh osx-42.sh
@@ -53,5 +54,4 @@ git config --global user.email $MAIL
 
 log $STEP "Backup"
 cp backup.sh ~
-
 cp .backup ~
