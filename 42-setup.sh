@@ -26,7 +26,12 @@ log $TITLE "This might take a little while.\n"
 log $STEP "Configuration files"
 cp .zshrc ~
 touch ~/.hushlogin
+touch ~/.reminders
 ln -shf /sgoinfre/goinfre/Perso/$USER ~/sgoinfre
+
+log $STEP "fortune"
+cp -r fortune ~
+strfile ~/fortune/* > /dev/null
 
 log $STEP "OSX"
 sh osx-42.sh
