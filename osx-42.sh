@@ -57,10 +57,10 @@ defaults write -g WebContinuousSpellCheckingEnabled -bool false
 # Use U.S. international keyboard layout
 defaults delete com.apple.HIToolbox AppleEnabledInputSources
 defaults write com.apple.HIToolbox AppleCurrentKeyboardLayoutInputSourceID "com.apple.keylayout.USInternational-PC"
-defaults write com.apple.HIToolbox AppleDefaultAsciiInputSource -dict InputSourceKind "Keyboard Layout" "KeyboardLayout ID" -int 15000 "KeyboardLayout Name" "USInternational-PC"
-defaults write com.apple.HIToolbox AppleEnabledInputSources -array '{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 15000; "KeyboardLayout Name" = "USInternational-PC"; }'
-defaults write com.apple.HIToolbox AppleInputSourceHistory -array '{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 15000; "KeyboardLayout Name" = "USInternational-PC"; }'
-defaults write com.apple.HIToolbox AppleSelectedInputSources -array '{ InputSourceKind = "Keyboard Layout"; "KeyboardLayout ID" = 15000; "KeyboardLayout Name" = "USInternational-PC"; }'
+defaults write com.apple.HIToolbox AppleDefaultAsciiInputSource -array '<dict><key>InputSourceKind</key><string>KeyboardLayout</string><key>KeyboardLayoutID</key><integer>15000</integer><key>KeyboardLayoutName</key><string>USInternational-PC</string></dict>'
+defaults write com.apple.HIToolbox AppleEnabledInputSources -array '<dict><key>InputSourceKind</key><string>KeyboardLayout</string><key>KeyboardLayoutID</key><integer>15000</integer><key>KeyboardLayoutName</key><string>USInternational-PC</string></dict>'
+defaults write com.apple.HIToolbox AppleInputSourceHistory -array '<dict><key>InputSourceKind</key><string>KeyboardLayout</string><key>KeyboardLayoutID</key><integer>15000</integer><key>KeyboardLayoutName</key><string>USInternational-PC</string></dict>'
+defaults write com.apple.HIToolbox AppleSelectedInputSources -array '<dict><key>InputSourceKind</key><string>KeyboardLayout</string><key>KeyboardLayoutID</key><integer>15000</integer><key>KeyboardLayoutName</key><string>USInternational-PC</string></dict>'
 killall SystemUIServer
 
 log $STEP "User interface"
@@ -195,26 +195,24 @@ defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
 defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
 # Show item info near icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:showItemInfo true" ~/Library/Preferences/com.apple.finder.plist
 # Show item info to the right of the icons on the desktop
 /usr/libexec/PlistBuddy -c "Set DesktopViewSettings:IconViewSettings:labelOnBottom false" ~/Library/Preferences/com.apple.finder.plist
 # Enable snap-to-grid for icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:arrangeBy grid" ~/Library/Preferences/com.apple.finder.plist
 # Increase grid spacing for icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:gridSpacing 100" ~/Library/Preferences/com.apple.finder.plist
 # Increase the size of icons on the desktop and in other icon views
 /usr/libexec/PlistBuddy -c "Set :DesktopViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
-/usr/libexec/PlistBuddy -c "Set :FK_StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
 /usr/libexec/PlistBuddy -c "Set :StandardViewSettings:IconViewSettings:iconSize 80" ~/Library/Preferences/com.apple.finder.plist
 # Use list view in all Finder windows by default
 defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
 # Disable the warning before emptying the Trash
 defaults write com.apple.finder WarnOnEmptyTrash -bool false
+# Empty Trash securely by default
+defaults write com.apple.finder EmptyTrashSecurely -bool true
 # Show the ~/Library folder
 chflags nohidden ~/Library
 # Expand the following File Info panes:
@@ -303,9 +301,37 @@ log $STEP "Google Chrome"
 defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
 defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
 
+log $STEP "Skype"
+# Don't collapse chat view and sidebar
+defaults write com.skype.skype AutoCollapseChatView -bool false
+defaults write com.skype.skype AutoCollapseSidebar -bool false
+# Show debug/webkit menus
+defaults write com.skype.skype IncludeDebugMenu -bool true
+defaults write com.skype.skype WebKitDeveloperExtras -bool true
+# Disable that annoying welcome tour
+defaults write com.skype.skype SKDisableWelcomeTour -bool true
+defaults write com.skype.skype SKShowWelcomeTour -bool false
+# Remove the dialpad when logging in
+defaults write com.skype.skype ShowDialpadOnLogin -bool false
+defaults write com.skype.skype DialpadOpen -bool false
+
+log $STEP "iTunes"
+# Prevent iTunes from taking control of play button
+launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist &> /dev/null
+
+log $STEP "Spotify"
+# Prevent Spotify from sleeping (AppNap disable)
+defaults write com.spotify.client NSAppSleepDisabled -bool YES
+
 log $STEP "iTerm 2"
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+defaults write com.googlecode.iterm2 PromptOnClose -bool false
+# Dim only text, and use a custom amount
+defaults write com.googlecode.iterm2 DimOnlyText -bool true
+defaults write com.googlecode.iterm2 SplitPaneDimmingAmount 0.32
+# Allow clipboard access to terminal apps
+defaults write com.googlecode.iterm2 AllowClipboardAccess -bool true
 
 log $STEP "XCode"
 # Always use tabs for indenting
