@@ -1,7 +1,8 @@
 #!/bin/sh
 
 # This script will configure a new session at 42.
-# Please don't run this, as it sets git emails and stuff.
+# Please don't run this without reading EVERYTHING, I have a lot of custom
+# configurations you might not like :)
 
 BLACK=0
 RED=1
