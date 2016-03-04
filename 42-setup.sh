@@ -37,6 +37,7 @@ log $STEP "OSX"
 sh osx-42.sh
 
 log $STEP "Homebrew"
+rm -rf ~/.brew
 sh brew.sh
 
 log $STEP "vim"
