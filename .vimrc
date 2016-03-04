@@ -7,8 +7,6 @@ if empty(glob("~/.vim/autoload/plug.vim"))
 	" Download the actual plugin manager
 	execute '!curl -fLo ~/.vim/autoload/plug.vim
 	\ https://raw.github.com/junegunn/vim-plug/master/plug.vim'
-	" Execute plug install
-	execute 'PlugInstall'
 endif
 
 " Call our plugins
