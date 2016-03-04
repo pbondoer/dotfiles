@@ -110,7 +110,7 @@ defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 defaults write com.apple.systempreferences NSQuitAlwaysKeepsWindows -bool false
 # Disable the “Are you sure you want to open this application?” dialog
 defaults write com.apple.LaunchServices LSQuarantine -bool false
-# Remove duplicates in the “Open With” menu (also see `lscleanup` alias)
+# Remove duplicates in the “Open With” menu
 /System/Library/Frameworks/CoreServices.framework/Frameworks/LaunchServices.framework/Support/lsregister -kill -r -domain local -domain system -domain user
 # Disable automatic termination of inactive apps
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
@@ -136,15 +136,19 @@ defaults write com.apple.NetworkBrowser DisableAirDrop -bool YES
 # Turn off WiFi
 networksetup -setairportpower en1 off > /dev/null
 # Hide all icons except clock and volume
-defaults write ~/Library/Preferences/ByHost/com.apple.systemuiserver.* dontAutoLoad -array \
-	"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
-	"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
-	"/System/Library/CoreServices/Menu Extras/User.menu" \
-	"/System/Library/CoreServices/Menu Extras/AirPort.menu" \
-	"/System/Library/CoreServices/Menu Extras/TextInput.menu"
+for plist in ~/Library/Preferences/ByHost/com.apple.systemuiserver.*.plist
+do
+	defaults write $plist dontAutoLoad -array \
+		"/System/Library/CoreServices/Menu Extras/TimeMachine.menu" \
+		"/System/Library/CoreServices/Menu Extras/Bluetooth.menu" \
+		"/System/Library/CoreServices/Menu Extras/User.menu" \
+		"/System/Library/CoreServices/Menu Extras/AirPort.menu" \
+		"/System/Library/CoreServices/Menu Extras/TextInput.menu"
+done
 defaults write com.apple.systemuiserver menuExtras -array \
 	"/System/Library/CoreServices/Menu Extras/Volume.menu" \
 	"/System/Library/CoreServices/Menu Extras/Clock.menu"
+killall SystemUIServer
 
 log $STEP "Screenshots"
 # Save screenshots to a inside ~/screenshots
