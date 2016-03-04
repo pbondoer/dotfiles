@@ -32,3 +32,7 @@ do
 	log $YELLOW "$package"
 	brew install $package &> /dev/null
 done < brew_list
+
+# Cleanup
+log $GREEN "Cleanup..."
+brew cleanup &> /dev/null
