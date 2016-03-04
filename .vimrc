@@ -21,8 +21,11 @@ Plug 'airblade/vim-gitgutter'
 " [plugin] line plugins
 Plug 'bling/vim-bufferline'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 let g:airline_powerline_fonts = 0
+Plug 'vim-airline/vim-airline-themes'
+" [plugin] emoji
+Plug 'junegunn/vim-emoji'
+set completefunc=emoji#complete " Allow emoji completion
 " [plugin] extra
 " Plug 'szw/vim-ctrlspace'
 " Plug 'AlexJF/rename.vim', { 'on': 'Rename' }
