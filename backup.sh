@@ -33,7 +33,7 @@ log $TITLE "// backup.sh //\n"
 # Count the amount of backups
 BACKUPS=`find $BACKUP_BASEDIR/* -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l | tr -d ' '`
 printf "Found $BACKUPS existing backups\n"
-TODAY=`date +%d-%m-%y/%Hh%M`
+TODAY=`date +%y-%m-%d/%Hh%M`
 DIR=$BACKUP_BASEDIR/$TODAY
 printf "Destination directory is $DIR\n\n"
 
