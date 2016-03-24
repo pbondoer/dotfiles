@@ -1,9 +1,5 @@
 #!/bin/sh
 
-# This script will configure a new session at 42.
-# Please don't run this without reading EVERYTHING, I have a lot of custom
-# configurations you might not like :)
-
 BLACK=0
 RED=1
 GREEN=2
@@ -21,13 +17,29 @@ log() {
 TITLE=$MAGENTA
 STEP=$CYAN
 
+log $RED "\n/!\\ WARNING - DANGER ZONE /!\\ "
+log $RED "This will erase some configurations and should only be used to
+initialize a new session at 42. Please only run this script *after* reading
+absolutely everything.\n"
+
+read -p "Continue (y/n)? " -n 1 -r
+echo "\n" # add some padding
+
+if ! [[ $REPLY =~ ^[Yy]$ ]]
+then
+	log $STEP "Aborted by user."
+	exit 0
+fi
+
 log $TITLE "Configuring session for $USER..."
 log $TITLE "This might take a little while.\n"
 
 log $STEP "Configuration files"
 cp .zshrc ~
+source .zshrc > /dev/null
 touch ~/.hushlogin
 touch ~/.reminders
+rm ~/sgoinfre &> /dev/null
 ln -shf /sgoinfre/goinfre/Perso/$USER ~/sgoinfre
 
 log $STEP "fortune"
@@ -61,3 +73,6 @@ git config --global user.email $MAIL
 log $STEP "Backup"
 cp backup.sh ~
 cp .backup ~
+
+log $GREEN "\nYour session is now configured, please relog for full effect.
+Thanks for all the fish ><>!"
