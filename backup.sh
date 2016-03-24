@@ -1,16 +1,9 @@
+#!/bin/sh
+source color.sh
+
 # backup.sh - Simple backup script
 # @author pbondoer
 # @license CC0 - https://creativecommons.org/publicdomain/zero/1.0
-
-# Color constants
-BLACK=0
-RED=1
-GREEN=2
-YELLOW=3
-BLUE=4
-MAGENTA=5
-CYAN=6
-WHITE=7
 
 # Log message colors
 ERROR=$RED
@@ -22,11 +15,6 @@ TITLE=$MAGENTA
 # Configuration
 BASEDIR=~
 BACKUP_BASEDIR=/backup
-
-log() {
-	tput setaf $1
-	printf "$2"
-}
 
 log $TITLE "// backup.sh //\n"
 

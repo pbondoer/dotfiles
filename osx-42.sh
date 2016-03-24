@@ -1,4 +1,5 @@
 #!/bin/sh
+source color.sh
 
 # Script to configure a new session at 42.
 # Don't run this script without reading it first!
@@ -7,20 +8,6 @@
 # https://github.com/mathiasbynens/dotfiles/blob/master/.osx
 # Some taken from here
 # https://gist.github.com/brandonb927/3195465
-
-BLACK=0
-RED=1
-GREEN=2
-YELLOW=3
-BLUE=4
-MAGENTA=5
-CYAN=6
-WHITE=7
-
-log() {
-	tput setaf $1
-	printf "$2\n"
-}
 
 STEP=$YELLOW
 CATEGORY=$GREEN

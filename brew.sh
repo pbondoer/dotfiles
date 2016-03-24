@@ -1,12 +1,5 @@
 #!/bin/sh
-
-GREEN=2
-YELLOW=3
-
-log() {
-	tput setaf $1
-	printf "$2\n"
-}
+source color.sh
 
 # Use proper directories
 export HOMEBREW_CACHE=/tmp/Homebrew/Caches

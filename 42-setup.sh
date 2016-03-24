@@ -1,18 +1,5 @@
 #!/bin/sh
-
-BLACK=0
-RED=1
-GREEN=2
-YELLOW=3
-BLUE=4
-MAGENTA=5
-CYAN=6
-WHITE=7
-
-log() {
-	tput setaf $1
-	printf "$2\n"
-}
+source color.sh
 
 TITLE=$MAGENTA
 STEP=$CYAN
@@ -35,6 +22,7 @@ log $TITLE "Configuring session for $USER..."
 log $TITLE "This might take a little while.\n"
 
 log $STEP "Configuration files"
+cp color.sh ~
 cp .zshrc ~
 source .zshrc > /dev/null
 touch ~/.hushlogin
