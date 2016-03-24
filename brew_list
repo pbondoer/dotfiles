@@ -12,3 +12,5 @@
  cowsay
  cloc
  unrar
+ ncdu
+ coreutils

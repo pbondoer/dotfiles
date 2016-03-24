@@ -57,5 +57,5 @@ fi
 # gpg alias
 alias gpg=gpg2
 # size alias
-alias size="du -ch -d 1"
+alias size="du -ch -d 1 | gsort -h"
 # <3 from lemon
