@@ -12,6 +12,11 @@ FILE=$YELLOW
 SUCCESS=$GREEN
 TITLE=$MAGENTA
 
+log() {
+	tput setaf $1
+	printf "$2"
+}
+
 # Configuration
 BASEDIR=~
 BACKUP_BASEDIR=/backup
@@ -75,6 +80,7 @@ do
 			if [ $REASON -eq 20 ]
 			then
 				log $INFO "... interrupted by user ($REASON)\n"
+				rm -rf $DIR
 				exit $REASON
 			fi
 			log $ERROR "... error ($REASON)\n"
