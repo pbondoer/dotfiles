@@ -7,7 +7,8 @@ STEP=$CYAN
 log $RED "\n/!\\ WARNING - DANGER ZONE /!\\ "
 log $RED "This will erase some configurations and should only be used to
 initialize a new session at 42. Please only run this script *after* reading
-absolutely everything.\n"
+absolutely everything.\n\nPlease close all applications before continuing as you
+will be logged out at the end of this script.\n"
 
 read -p "Continue (y/n)? " -n 1 -r
 echo "\n" # add some padding
@@ -62,5 +63,9 @@ log $STEP "Backup"
 cp backup.sh ~
 cp .backup ~
 
-log $GREEN "\nYour session is now configured, please relog for full effect.
+log $GREEN "\nYour session is now configured, you will now be logged out.\n
 Thanks for all the fish ><>!"
+sleep 3
+osascript -e 'tell application "loginwindow" to  «event aevtrlgo»'
+killall iTerm > /dev/null
+killall Terminal > /dev/null
