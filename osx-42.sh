@@ -266,6 +266,26 @@ defaults write com.apple.ActivityMonitor IconType -int 5
 defaults write com.apple.ActivityMonitor ShowCategory -int 0
 defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
 defaults write com.apple.ActivityMonitor SortDirection -int 0
+# Mavericks: Add the "% CPU" column to the Disk and Network tabs
+defaults write com.apple.ActivityMonitor "UserColumnsPerTab v4.0" -dict \
+    '0' '( Command, CPUUsage, CPUTime, Threads, IdleWakeUps, PID, UID )' \
+    '1' '( Command, anonymousMemory, Threads, Ports, PID, UID, ResidentSize )' \
+    '2' '( Command, PowerScore, 12HRPower, AppSleep, graphicCard, UID )' \
+    '3' '( Command, bytesWritten, bytesRead, Architecture, PID, UID, CPUUsage )' \
+    '4' '( Command, txBytes, rxBytes, txPackets, rxPackets, PID, UID, CPUUsage )'
+# Mavericks: Sort by CPU usage in Disk and Network tabs
+defaults write com.apple.ActivityMonitor UserColumnSortPerTab -dict \
+    '0' '{ direction = 0; sort = CPUUsage; }' \
+    '1' '{ direction = 0; sort = ResidentSize; }' \
+    '2' '{ direction = 0; sort = 12HRPower; }' \
+    '3' '{ direction = 0; sort = CPUUsage; }' \
+    '4' '{ direction = 0; sort = CPUUsage; }'
+# Update every 1 second
+defaults write com.apple.ActivityMonitor UpdatePeriod -int 1
+# Mavericks: Show Data in the Disk graph (instead of IO)
+defaults write com.apple.ActivityMonitor DiskGraphType -int 1
+# Mavericks: Show Data in the Network graph (instead of packets)
+defaults write com.apple.ActivityMonitor NetworkGraphType -int 1
 
 log $STEP "Archive Utility"
 # Move archives to trash after extracting
@@ -281,6 +301,47 @@ defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 log $STEP "Photos"
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
+
+log $STEP "Safari"
+# Prevent "Try the new Safari" notification
+defaults write com.apple.coreservices.uiagent CSUIHasSafariBeenLaunched -bool YES
+defaults write com.apple.coreservices.uiagent CSUIRecommendSafariNextNotificationDate -date 2050-01-01T00:00:00Z
+defaults write com.apple.coreservices.uiagent CSUILastOSVersionWhereSafariRecommendationWasMade -float 10.99
+# Prevent Safari from asking to be the default browser
+defaults write com.apple.Safari DefaultBrowserDateOfLastPrompt -date '2050-01-01T00:00:00Z'
+defaults write com.apple.Safari DefaultBrowserPromptingState -int 2
+# Show status bar
+defaults write com.apple.Safari ShowStatusBar -bool true
+# Show tab bar
+defaults write com.apple.Safari AlwaysShowTabBar -bool true
+# Safari opens with: A new window
+defaults write com.apple.Safari AlwaysRestoreSessionAtLaunch -bool false
+# New windows open with: Empty Page
+defaults write com.apple.Safari NewWindowBehavior -int 1
+# New tabs open with: Empty Page
+defaults write com.apple.Safari NewTabBehavior -int 1
+# Homepage
+defaults write com.apple.Safari HomePage -string "about:blank"
+# Don't open "safe" files after downloading
+defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
+# Open pages in tabs instead of windows: automatically
+defaults write com.apple.Safari TabCreationPolicy -int 1
+# Don't make new tabs active
+defaults write com.apple.Safari OpenNewTabsInFront -bool false
+# Command-clicking a link creates tabs
+defaults write com.apple.Safari CommandClickMakesTabs -bool true
+# Warn About Fraudulent Websites
+defaults write com.apple.Safari WarnAboutFraudulentWebsites -bool true
+# Enable JavaScript
+defaults write com.apple.Safari WebKitJavaScriptEnabled -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptEnabled -bool true
+# Block pop-up windows
+defaults write com.apple.Safari WebKitJavaScriptCanOpenWindowsAutomatically -bool false
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2JavaScriptCanOpenWindowsAutomatically -bool false
+# Do not track
+defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
+# Don't even ask about the push notifications
+defaults write com.apple.Safari CanPromptForPushNotifications -bool false
 
 # -----------------------------------------------------------------------------
 # Custom apps
