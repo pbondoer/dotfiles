@@ -1,6 +1,24 @@
+# Completion
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' menu select
+zstyle ':completion:*' group-name ''
+
+autoload -Uz compinit
+compinit
+
+# History file
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+unsetopt autocd
+
+# Vi keybinding
+bindkey -v
+
 # fix locale
 export LC_ALL=en_US.utf-8 
 export LANG="$LC_ALL"
+
 # allow colors
 autoload -U colors && colors
 # allow substitution (needed for git)
@@ -15,34 +33,25 @@ precmd() {
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git*' formats " (%b)"
 
-# zsh zstyle options
-# activate menu selection
-zstyle ':completion:*' menu select
-# let's use the tag name as group name
-zstyle ':completion:*' group-name ''
-
 # fix del key
 bindkey "^[[3~" delete-char
 
 # variables
-export MAIL="$USER@student.42.fr"
+export MAIL="pierre@bondoer.fr"
 export PROMPT=' %B%n%b@%U%m%u:%S%c%s%{$fg[yellow]%}${vcs_info_msg_0_} %{$reset_color%}%# '
 export RPROMPT='%t'
-export PATH="$HOME/.brew/bin:$PATH"
 export EDITOR="vim"
 
-# brew: use proper caches dir
-mkdir -p /tmp/Homebrew/Caches
-export HOMEBREW_CACHE=/tmp/Homebrew/Caches
-# brew: use tmp for temp
-mkdir -p /tmp/Homebrew/Temp
-export HOMEBREW_TEMP=/tmp/Homebrew/Temp
+# 42 variables
+export USER_42="pbondoer"
+export MAIL_42="pbondoer@student.42.fr"
 
 # fortune
 fortune ~/fortune
 #gshuf -n 1 .quotes | sed 's/\\n/\'$'\n/g'
 #cat .quotes | perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);' | tail -1 | sed 's/\\n/\'$'\n/g'
 echo ""
+
 # reminders
 if [ -f ~/.reminders ]
 then
@@ -55,7 +64,7 @@ then
 fi
 
 # gpg alias
-alias gpg=gpg2
+# alias gpg=gpg2
 # size alias
 alias size="du -ch -d 1 | gsort -h"
 # <3 from lemon
