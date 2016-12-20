@@ -1,6 +1,34 @@
+OS=`uname`
+if [ $OS = "Linux" ] ; then
+fi
+
+# Completion
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' menu select
+zstyle ':completion:*' group-name ''
+
+autoload -Uz compinit
+compinit
+compdef _gnu_generic cat
+compdef _git git
+
+if [ $OS = "Linux" ] ; then
+	compdef _pacman yaourt=pacman
+fi
+
+# History file
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+unsetopt autocd
+
+# Vi keybinding
+bindkey -v
+
 # fix locale
 export LC_ALL=en_US.utf-8 
 export LANG="$LC_ALL"
+
 # allow colors
 autoload -U colors && colors
 # allow substitution (needed for git)
@@ -15,34 +43,26 @@ precmd() {
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:git*' formats " (%b)"
 
-# zsh zstyle options
-# activate menu selection
-zstyle ':completion:*' menu select
-# let's use the tag name as group name
-zstyle ':completion:*' group-name ''
-
 # fix del key
 bindkey "^[[3~" delete-char
 
 # variables
-export MAIL="$USER@student.42.fr"
+if [ $OS = "Linux" ] ; then
+	export MAIL="pierre@bondoer.fr"
+	export USER="lemon"
+else
+	export MAIL="pbondoer@student.42.fr"
+	export USER="pbondoer"
+fi
+
 export PROMPT=' %B%n%b@%U%m%u:%S%c%s%{$fg[yellow]%}${vcs_info_msg_0_} %{$reset_color%}%# '
 export RPROMPT='%t'
-export PATH="$HOME/.brew/bin:$PATH"
 export EDITOR="vim"
-
-# brew: use proper caches dir
-mkdir -p /tmp/Homebrew/Caches
-export HOMEBREW_CACHE=/tmp/Homebrew/Caches
-# brew: use tmp for temp
-mkdir -p /tmp/Homebrew/Temp
-export HOMEBREW_TEMP=/tmp/Homebrew/Temp
 
 # fortune
 fortune ~/fortune
-#gshuf -n 1 .quotes | sed 's/\\n/\'$'\n/g'
-#cat .quotes | perl -MList::Util=shuffle -e 'print shuffle(<STDIN>);' | tail -1 | sed 's/\\n/\'$'\n/g'
 echo ""
+
 # reminders
 if [ -f ~/.reminders ]
 then
@@ -54,8 +74,30 @@ then
 	echo ""
 fi
 
-# gpg alias
-alias gpg=gpg2
-# size alias
-alias size="du -ch -d 1 | gsort -h"
+# window titles
+case $TERM in
+	*xterm*|rxvt|rxvt-unicode|rxvt-256color|(dt|k|E)term)
+		precmd () { print -Pn "\e]0;$TERM - [%n@%M]%# [%~]\a" } 
+		preexec () { print -Pn "\e]0;$TERM - [%n@%M]%# [%~] ($1)\a" }
+		;;
+	screen)
+		precmd () { 
+			print -Pn "\e]83;title \"$1\"\a" 
+			print -Pn "\e]0;$TERM - [%n@%M]%# [%~]\a" 
+		}
+		preexec () { 
+			print -Pn "\e]83;title \"$1\"\a" 
+			print -Pn "\e]0;$TERM - [%n@%M]%# [%~] ($1)\a" 
+		}
+		;; 
+esac
+
+# quick way to paste stuff
+sprunge() {
+	cat $1 | curl -F 'sprunge=<-' http://sprunge.us
+}
+
+# alias gpg=gpg2
+alias size="du -ch -d 1 | sort -h"
+alias ff="firefox-developer"
 # <3 from lemon
