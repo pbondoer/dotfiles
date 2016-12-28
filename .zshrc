@@ -58,6 +58,7 @@ fi
 export PROMPT=' %B%n%b@%U%m%u:%S%c%s%{$fg[yellow]%}${vcs_info_msg_0_} %{$reset_color%}%# '
 export RPROMPT='%t'
 export EDITOR="vim"
+export GPG_TTY=$(tty)
 
 # fortune
 fortune ~/fortune
