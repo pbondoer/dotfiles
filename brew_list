@@ -1,4 +1,4 @@
- vim --override-system-vi
+ neovim/neovim/neovim
  homebrew/dupes/grep
  valgrind
  gist

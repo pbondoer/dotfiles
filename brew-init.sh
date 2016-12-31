@@ -1,7 +1,7 @@
 #!/bin/sh
 source color.sh
 
-log $CYAN "Performing first time setup"
+log $CYAN "Performing first time brew setup"
 
 log $GREEN "Removing old install..."
 rm -rf $HOME/.brew
