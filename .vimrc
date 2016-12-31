@@ -1,61 +1,38 @@
-" ++++ vim-plug ++++
-" Install it if we don't already have it
-if empty(glob("~/.vim/autoload/plug.vim"))
-	" Ensure all needed directories exist  (Thanks @kapadiamush)
-	execute '!mkdir -p ~/.vim/plugged'
-	execute '!mkdir -p ~/.vim/autoload'
-	" Download the actual plugin manager
-	execute '!curl -fLo ~/.vim/autoload/plug.vim
-	\ https://raw.github.com/junegunn/vim-plug/master/plug.vim'
-endif
-
-" Call our plugins
+" plugins
 call plug#begin()
-" [plugin] color schemes
-Plug 'captbaritone/molokai'
-Plug 'altercation/vim-colors-solarized'
-" [plugin] git gutter
+" Plug 'captbaritone/molokai'
+Plug 'tomasr/molokai'
 Plug 'airblade/vim-gitgutter'
-" [plugin] line plugins
-Plug 'bling/vim-bufferline'
+" Plug 'bling/vim-bufferline'
 Plug 'vim-airline/vim-airline'
-let g:airline_powerline_fonts = 0
 Plug 'vim-airline/vim-airline-themes'
-" [plugin] emoji
-Plug 'junegunn/vim-emoji'
-set completefunc=emoji#complete " Allow emoji completion
-" [plugin] extra
-" Plug 'szw/vim-ctrlspace'
-" Plug 'AlexJF/rename.vim', { 'on': 'Rename' }
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'tpope/vim-commentary'
+Plug 'kien/rainbow_parentheses.vim'
 call plug#end()
 
-" ++++ config ++++
-" hardmode: no arrow keys
-vnoremap <Up> <Nop>
-vnoremap <Down> <Nop>
-vnoremap <Left> <Nop>
-vnoremap <Right> <Nop>
-nnoremap <Up> <Nop>
-nnoremap <Down> <Nop>
-nnoremap <Left> <Nop>
-nnoremap <Right> <Nop>
-inoremap <Up> <Nop>
-inoremap <Down> <Nop>
-inoremap <Left> <Nop>
-inoremap <Right> <Nop>
+" no arrow keys!
+noremap <Up> <Nop>
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
 
-" essential: stuff i can't put in a category
-set nocompatible " needed
+" stuff i can't put in a category
+if !has('nvim')
+	set nocompatible " needed for plug in vim
+	set ttyfast " make vim faster if using vim
+endif
+
 set backspace=indent,eol,start " fix backspace
-set ttyfast " enable fast terminal connection
 set laststatus=2 " force displaying a statusbar
 set nostartofline " prevent cursor from changing columns
 set hidden " hide buffer when opening new ones
 set visualbell " show a visual bell instead of beeping
 set noerrorbells " dont beep
 set confirm " prompt when failing to save
+set lazyredraw " doesn't redraw when executing commands that havent been typed
 
-" essential: syntax & indent
+" syntax & indent
 syntax on " enable syntax highlighting
 filetype indent plugin on " file-type detection
 set shiftwidth=4 " shift by 4 every indent
@@ -66,7 +43,7 @@ set autoindent " auto-indent new lines
 set copyindent " copy indent from previous lines
 set shiftround " use multiple of shiftwidth when indenting with < and >
 
-" essential: display
+" display
 set ruler " display a ruler in the status line
 set cursorline " highlight current line
 set number " show line numbers
@@ -75,14 +52,15 @@ set list " show invisible characters, see next option
 set listchars=trail:~,extends:>,tab:▸·,eol:↵
 set textwidth=80 " auto-wrap at 80
 set showmatch " show matching group pair (parenthesis, etc.)
+set background=dark " tell vim that we have a dark background
 
-" essential: search
+" search
 set incsearch " scroll to nearest match when searching
 set hlsearch " highlight searches
 set ignorecase " ignore case when searching, needed for next option
 set smartcase " smart-case searching
 
-" essential: backup, swap, undo, autosave
+" backup, swap, undo, autosave
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
 if exists("&undodir")
@@ -91,26 +69,43 @@ endif
 autocmd BufLeave,FocusLost * silent! wall " autosave when losing focus
 set autowriteall " save upon switching buffers
 
-" essential: history & undos
+" history & undos
 set history=1000 " remembers lots
 set undolevels=1000 " (lots)
 
-" essential: commands
+" commands
 set wildmenu " allow TAB-completion in commands
 set wildignore=*.swp,*.o,.git,*~ " ignore pattern for wildcards
 set showcmd " display current command
-set cmdheight=2 " use 2 spaces for the
-set notimeout ttimeout ttimeoutlen=200 " 200ms timeout
+set cmdheight=1 " use 2 columns for the command line
+set notimeout ttimeout ttimeoutlen=20 " 20ms timeout
 
-" essential: others
+" splits
+set splitbelow " saner defaults
+set splitright " same as above
+
+" other stuff
 set pastetoggle=<F2> " toggle pasting from external source
-" yank till end of line
+" quickly yank till the end of a line
 map Y y$
 " ctrl-L removes highlight on redraw
 nnoremap <C-L> :nohl<CR><C-L>
 
-" ++++ colors ++++
-colorscheme molokai
-let g:airline_theme = "molokai"
+" plugin: rainbow parantheses 
+au VimEnter * RainbowParenthesesToggle
+au Syntax * RainbowParenthesesLoadRound
+au Syntax * RainbowParenthesesLoadSquare
+au Syntax * RainbowParenthesesLoadBraces
 
+" plugin: indent guides
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size = 1
+
+" pretty colors
+colorscheme molokai
+
+let g:airline_theme = "molokai"
+let g:airline_powerline_fonts = 0
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 " <3 from lemon
