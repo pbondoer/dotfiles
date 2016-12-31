@@ -19,16 +19,22 @@ log() {
 
 # Configuration
 BASEDIR=~
-BACKUP_BASEDIR=/backup
-
+BACKUP_BASEDIR=/sgoinfre/goinfre/Perso/$USER
+BACKUP_DIR=$BACKUP_BASEDIR/backup
 log $TITLE "// backup.sh //\n"
 
 # Count the amount of backups
-BACKUPS=`find $BACKUP_BASEDIR/* -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l | tr -d ' '`
+BACKUPS=`find $BACKUP_DIR/* -mindepth 1 -maxdepth 1 -type d 2>/dev/null | wc -l | tr -d ' '`
 printf "Found $BACKUPS existing backups\n"
+
 TODAY=`date +%y-%m-%d/%Hh%M`
-DIR=$BACKUP_BASEDIR/$TODAY
+DIR=$BACKUP_DIR/$TODAY
 printf "Destination directory is $DIR\n\n"
+
+# Make and own our basedir
+mkdir -p $BACKUP_BASEDIR
+chmod 700 $BACKUP_BASEDIR
+chown $USER $BACKUP_BASEDIR
 
 # Make our backup directory
 mkdir -p $DIR
