@@ -376,6 +376,8 @@ log $STEP "Spotify"
 defaults write com.spotify.client NSAppSleepDisabled -bool YES
 
 log $STEP "iTerm 2"
+# Import our predefined profile
+defaults import com.googlecode.iterm2 iterm.plist
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 defaults write com.googlecode.iterm2 PromptOnClose -bool false
@@ -384,6 +386,8 @@ defaults write com.googlecode.iterm2 DimOnlyText -bool true
 defaults write com.googlecode.iterm2 SplitPaneDimmingAmount 0.32
 # Allow clipboard access to terminal apps
 defaults write com.googlecode.iterm2 AllowClipboardAccess -bool true
+# Opens files in new windows instead of a new tab
+defaults write com.googlecode.iterm2 OpenFileInNewWindows -bool true
 
 log $STEP "XCode"
 # Always use tabs for indenting

@@ -35,9 +35,6 @@ log $STEP "fortune"
 cp -r fortune ~
 strfile ~/fortune/* > /dev/null
 
-log $STEP "OSX"
-sh osx-42.sh
-
 log $STEP "Homebrew"
 rm -rf ~/.brew
 sh brew.sh
@@ -62,6 +59,9 @@ git config --global user.email $MAIL
 log $STEP "Backup"
 cp backup.sh ~
 cp .backup ~
+
+log $STEP "OSX"
+sh osx-42.sh
 
 log $GREEN "\nYour session is now configured, you will now be logged out.\n
 Thanks for all the fish ><>!"
