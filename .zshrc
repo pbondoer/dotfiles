@@ -2,67 +2,102 @@ OS=`uname`
 if [ $OS = "Linux" ] ; then
 fi
 
-# Completion
-zstyle ':completion:*' completer _complete _ignored _approximate
-zstyle ':completion:*' menu select
-zstyle ':completion:*' group-name ''
+# locale
+export LC_ALL=en_US.utf-8 
+export LANG="$LC_ALL"
 
+# misc options
+unsetopt AUTO_CD
+
+# allow colors
+autoload -U colors && colors
+
+# vcs prompt (options must be set to empty to disable)
+setopt prompt_subst
+autoload -Uz vcs_info
+zstyle ':vcs_info:*' enable git svn
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:git*' formats ' (%b)'
+
+precmd() {
+	vcs_info
+}
+
+# history
+HISTFILE=~/.bash_history
+HISTSIZE=1000
+SAVEHIST=10000
+setopt hist_ignore_all_dups
+
+
+# autocomplete
 autoload -Uz compinit
 compinit
+
 compdef _gnu_generic cat
+compdef _gnu_generic gcc
+compdef _gnu_generic gdb
 compdef _git git
+setopt complete_in_word
 
 if [ $OS = "Linux" ] ; then
 	compdef _pacman yaourt=pacman
 fi
 
-# History file
-HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
-unsetopt autocd
+zstyle ':completion:*' completer _complete _ignored _approximate
+zstyle ':completion:*' menu select
+zstyle ':completion:*' group-name ''
 
-# Vi keybinding
-bindkey -v
-
-# fix locale
-export LC_ALL=en_US.utf-8 
-export LANG="$LC_ALL"
-
-# allow colors
-autoload -U colors && colors
-# allow substitution (needed for git)
-setopt PROMPT_SUBST
-
-# git prompt (options must be set to empty to disable)
-autoload -Uz vcs_info
-zstyle ':vcs_info:*' enable git svn
-precmd() {
-	vcs_info
-}
-zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:git*' formats " (%b)"
-
-# fix del key
+# delete key
 bindkey "^[[3~" delete-char
 
 # variables
 if [ $OS = "Linux" ] ; then
 	export MAIL="pierre@bondoer.fr"
-	export USER="lemon"
 else
-	export MAIL="pbondoer@student.42.fr"
-	export USER="pbondoer"
+	export MAIL="$USER@student.42.fr"
+	export PATH="$HOME/.brew/bin:$PATH"
 fi
 
-export PROMPT=' %B%n%b@%U%m%u:%S%c%s%{$fg[yellow]%}${vcs_info_msg_0_} %{$reset_color%}%# '
-export RPROMPT='%t'
-export EDITOR="vim"
+export USER="pbondoer"
+export EDITOR="nvim"
 export GPG_TTY=$(tty)
+export CLICOLOR=1
+export XDG_CONFIG_HOME=$HOME/.config
+
+# prompt
+P_TIME='%F{blue}%B%D{%L:%M %p}%b%f'
+P_USER='%F{red}%B%n%b%f'
+P_HOST='%F{green}%B%U%m%u%b%f'
+P_DIR='%F{magenta}%S%c%s%f'
+P_GIT='%F{yellow}%B${vcs_info_msg_0_}%b%f'
+P_EXIT='%(?..%F{red} [%?]%f)'
+
+export PROMPT="$P_EXIT $P_TIME > ${P_USER} $P_HOST > $P_DIR$P_GIT %# "
 
 # fortune
 fortune ~/fortune
 echo ""
+
+# window titles
+if [ $OS = "Linux" ] ; then
+	case $TERM in
+		*xterm*|rxvt|rxvt-unicode|rxvt-256color|(dt|k|E)term)
+			precmd () { print -Pn "\e]0;$TERM - [%n@%M]%# [%~]\a" } 
+			preexec () { print -Pn "\e]0;$TERM - [%n@%M]%# [%~] ($1)\a" }
+			;;
+		screen)
+			precmd () { 
+				print -Pn "\e]83;title \"$1\"\a" 
+				print -Pn "\e]0;$TERM - [%n@%M]%# [%~]\a" 
+			}
+			preexec () { 
+				print -Pn "\e]83;title \"$1\"\a" 
+				print -Pn "\e]0;$TERM - [%n@%M]%# [%~] ($1)\a" 
+			}
+			;; 
+	esac
+fi
 
 # reminders
 if [ -f ~/.reminders ]
@@ -75,30 +110,17 @@ then
 	echo ""
 fi
 
-# window titles
-case $TERM in
-	*xterm*|rxvt|rxvt-unicode|rxvt-256color|(dt|k|E)term)
-		precmd () { print -Pn "\e]0;$TERM - [%n@%M]%# [%~]\a" } 
-		preexec () { print -Pn "\e]0;$TERM - [%n@%M]%# [%~] ($1)\a" }
-		;;
-	screen)
-		precmd () { 
-			print -Pn "\e]83;title \"$1\"\a" 
-			print -Pn "\e]0;$TERM - [%n@%M]%# [%~]\a" 
-		}
-		preexec () { 
-			print -Pn "\e]83;title \"$1\"\a" 
-			print -Pn "\e]0;$TERM - [%n@%M]%# [%~] ($1)\a" 
-		}
-		;; 
-esac
+# aliases
+if [ $OS = "Linux" ] ; then
+	alias size="du -ch -d 1 2>/dev/null | sort -h"
+	alias make="make -j 8"
+	alias ff="firefox-developer"
+else
+	alias size="du -ch -d 1 2>/dev/null | gsort -h"
+	alias make="gmake -j 8"
+	alias gpg="gpg2"
+fi
 
-# quick way to paste stuff
-sprunge() {
-	cat $1 | curl -F 'sprunge=<-' http://sprunge.us
-}
+alias vim="nvim"
 
-# alias gpg=gpg2
-alias size="du -ch -d 1 | sort -h"
-alias ff="firefox-developer"
 # <3 from lemon
