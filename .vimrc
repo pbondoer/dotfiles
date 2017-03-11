@@ -30,7 +30,6 @@ set hidden " hide buffer when opening new ones
 set visualbell " show a visual bell instead of beeping
 set noerrorbells " dont beep
 set confirm " prompt when failing to save
-set lazyredraw " doesn't redraw when executing commands that havent been typed
 
 " syntax & indent
 syntax on " enable syntax highlighting
@@ -96,6 +95,15 @@ au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+" relative numbers
+if exists('+relativenumber')
+	set rnu
+	autocmd FocusLost * :set nornu
+	autocmd FocusGained * :set rnu
+	autocmd InsertEnter * :set nornu
+	autocmd InsertLeave * :set rnu
+endif
 
 " plugin: indent guides
 let g:indent_guides_start_level = 2
