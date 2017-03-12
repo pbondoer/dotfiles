@@ -123,6 +123,7 @@ else
 	alias size="du -ch -d 1 2>/dev/null | gsort -h"
 	alias make="gmake -j 8"
 	alias gpg="gpg2"
+	alias love="open $HOME/bin/love.app"
 fi
 
 alias vim="nvim"
