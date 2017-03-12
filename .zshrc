@@ -60,7 +60,7 @@ if [ $OS = "Linux" ] ; then
 	export MAIL="pierre@bondoer.fr"
 else
 	export MAIL="$USER@student.42.fr"
-	export PATH="$HOME/.brew/bin:$PATH"
+	export PATH="$HOME/bin:$HOME/.brew/bin:$PATH"
 fi
 
 export USER="pbondoer"
