@@ -1,0 +1,46 @@
+! -- dzen2 configuration
+dzen2.font:             xft:DejaVu Sans Mono:pixelsize=12
+dzen2.background:       #000000
+dzen2.foreground:       #ffffff
+
+! -- urxvt
+urxvt*font:             xft:Inconsolata:pixelsize=14
+urxvt*scrollBar:        false
+urxvt*depth:            32
+
+! -- allows resize and clipboard stuff
+urxvt.perl-ext-common:  default,resize-font,clipboard
+urxvt.resize-font.smaller: C-Down
+urxvt.resize-font.bigger: C-Up
+
+! -- colors
+! Tango color scheme
+! from: http://pastebin.com/7g882jCS
+urxvt*background:       #1d1d1d
+urxvt*foreground:       #dedede
+urxvt*cursorColor:      #8ae234
+
+! - Aluminium -
+urxvt*color0:           #2e3436
+urxvt*color8:           #888A85
+! - Scariet Red -
+urxvt*color1:           #cc0000
+urxvt*color9:           #ef2929
+! - Chameleon -
+urxvt*color2:           #4e9a06
+urxvt*color10:          #8ae234
+! - Butter -
+urxvt*color3:           #edd400
+urxvt*color11:          #fce94f
+! - Sky Blue -
+urxvt*color4:           #3465a4
+urxvt*color12:          #729fcf
+! - Plum -
+urxvt*color5:           #92659a
+urxvt*color13:          #c19fbe
+! - Cyan -
+urxvt*color6:           #07c7ca
+urxvt*color14:          #63e9e9
+! - Aluminium 2 -
+urxvt*color7:           #d3d7cf
+urxvt*color15:          #eeeeec
