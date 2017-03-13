@@ -1,6 +1,4 @@
 OS=`uname`
-if [ $OS = "Linux" ] ; then
-fi
 
 # locale
 export LC_ALL=en_US.utf-8 
@@ -119,6 +117,7 @@ if [ $OS = "Linux" ] ; then
 	alias size="du -ch -d 1 2>/dev/null | sort -h"
 	alias make="make -j 8"
 	alias ff="firefox-developer"
+	alias ls="ls --color"
 else
 	alias size="du -ch -d 1 2>/dev/null | gsort -h"
 	alias make="gmake -j 8"
