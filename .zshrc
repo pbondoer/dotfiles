@@ -66,6 +66,7 @@ export EDITOR="nvim"
 export GPG_TTY=$(tty)
 export CLICOLOR=1
 export XDG_CONFIG_HOME=$HOME/.config
+export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=196m"
 
 # prompt
 P_TIME='%F{blue}%B%D{%L:%M %p}%b%f'
