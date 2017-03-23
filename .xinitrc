@@ -42,6 +42,6 @@ if [ -f $WALLPAPER ]; then
 fi
 
 # Run desktop environment
-exec compton --config ~/.config/.compton.conf --blur-kern 7x7box &
+exec compton --config ~/.config/compton.conf --blur-kern 7x7box &
 exec dunst &
 exec spectrwm
