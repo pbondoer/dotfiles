@@ -1,0 +1,10 @@
+[Unit]
+Description=Allow change to keyboard backlight
+
+[Service]
+Type=oneshot
+ExecStart=/bin/sh -c "chmod a+w /sys/class/leds/asus::kbd_backlight/brightness"
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target
