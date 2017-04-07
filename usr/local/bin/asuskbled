@@ -1,0 +1,23 @@
+#!/bin/bash
+value=$(cat /sys/class/leds/asus::kbd_backlight/brightness)
+
+case "$1" in
+    up)
+        if [ 3 -gt $value ] ;then
+            value=$(($value + 1))
+            echo $value | tee /sys/class/leds/asus::kbd_backlight/brightness
+        fi
+        ;;
+    down)
+        if [ 0 -lt $value ] ;then
+            value=$(($value - 1))
+            echo $value | tee /sys/class/leds/asus::kbd_backlight/brightness
+        fi
+        ;;
+    value)
+        echo $value
+        ;;
+    *)
+        echo "Usage: ./asuskbled [up|down|value]"
+        ;;
+esac
