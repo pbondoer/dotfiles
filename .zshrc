@@ -31,6 +31,7 @@ setopt hist_ignore_space
 setopt hist_verify
 setopt inc_append_history
 setopt share_history
+setopt extended_glob
 
 # autocomplete
 autoload -Uz compinit
@@ -127,5 +128,6 @@ else
 fi
 
 alias vim="nvim"
+alias project="xrandr --output HDMI-1 --auto"
 
 # <3 from lemon
