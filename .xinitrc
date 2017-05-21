@@ -36,10 +36,14 @@ setxkbmap -model pc105 -layout us -variant intl
 xset r rate 250 35
 
 # Set background
-export WALLPAPER=~/buibui.jpg
+export WALLPAPER=~/photo/magosleep.jpg
 if [ -f $WALLPAPER ]; then
 	hsetroot -fill $WALLPAPER
 fi
+
+# optirun and primusrun optimization
+export VGL_READBACK=pbo
+export vblank_mode=0 # disable vsync
 
 # Run desktop environment
 exec compton --config ~/.config/compton.conf --blur-kern 7x7box &
