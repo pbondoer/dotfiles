@@ -67,6 +67,7 @@ export EDITOR="nvim"
 export GPG_TTY=$(tty)
 export CLICOLOR=1
 export XDG_CONFIG_HOME=$HOME/.config
+# Work specific
 export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=196m"
 
 # prompt
@@ -116,18 +117,21 @@ fi
 
 # aliases
 if [ $OS = "Linux" ] ; then
-	alias size="du -ch -d 1 2>/dev/null | sort -h"
 	alias make="make -j 8"
 	alias ff="firefox-developer"
 	alias ls="ls --color"
+	alias project="xrandr --output HDMI-1 --auto"
+	alias hdd='sudo mount /dev/sdb1 /mnt/hdd'
+	alias usb='sudo mount /dev/sdc1 /mnt/usb'
+	# Work specific
+	alias mvnff='mvn clean install -U -Pintegration-tests -Dwebdriver.firefox.bin="/home/lemon/.m2/firefox/firefox-bin" -e'
 else
-	alias size="du -ch -d 1 2>/dev/null | gsort -h"
+	alias sort="gsort"
 	alias make="gmake -j 8"
 	alias gpg="gpg2"
 	alias love="$HOME/bin/love.app/Contents/MacOS/love"
 fi
 
 alias vim="nvim"
-alias project="xrandr --output HDMI-1 --auto"
-
+alias size="du -ch -d 1 2>/dev/null | sort -h"
 # <3 from lemon
