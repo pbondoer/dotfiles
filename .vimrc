@@ -1,14 +1,13 @@
 " plugins
 call plug#begin()
-" Plug 'captbaritone/molokai'
 Plug 'tomasr/molokai'
 Plug 'airblade/vim-gitgutter'
-" Plug 'bling/vim-bufferline'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'tpope/vim-commentary'
 Plug 'kien/rainbow_parentheses.vim'
+Plug 'lepture/vim-velocity'
+Plug 'w0rp/ale'
+Plug 'pbondoer/vim-42header'
 call plug#end()
 
 " no arrow keys!
@@ -30,6 +29,8 @@ set hidden " hide buffer when opening new ones
 set visualbell " show a visual bell instead of beeping
 set noerrorbells " dont beep
 set confirm " prompt when failing to save
+set lazyredraw " doesn't redraw when executing commands that havent been typed
+set encoding=utf-8 " unicode!
 
 " syntax & indent
 syntax on " enable syntax highlighting
@@ -90,24 +91,19 @@ map Y y$
 " ctrl-L removes highlight on redraw
 nnoremap <C-L> :nohl<CR><C-L>
 
+" relative numbers
+if exists('+relativenumber')
+	set rnu
+	autocmd InsertEnter * :set nornu
+	autocmd InsertLeave * :set rnu
+endif
+set rnu
+
 " plugin: rainbow parantheses 
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
-
-" relative numbers
-if exists('+relativenumber')
-	set rnu
-	autocmd FocusLost * :set nornu
-	autocmd FocusGained * :set rnu
-	autocmd InsertEnter * :set nornu
-	autocmd InsertLeave * :set rnu
-endif
-
-" plugin: indent guides
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size = 1
 
 " pretty colors
 colorscheme molokai
@@ -116,4 +112,8 @@ let g:airline_theme = "molokai"
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %severity% > %s'
 " <3 from lemon
