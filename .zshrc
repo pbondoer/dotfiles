@@ -1,4 +1,5 @@
 OS=`uname`
+HOST=`hostname`
 
 # locale
 export LC_ALL=en_US.utf-8 
@@ -102,6 +103,11 @@ if [ $OS = "Linux" ] ; then
 			}
 			;; 
 	esac
+fi
+
+# hostname
+if [ $OS = "Linux" && $HOST = "tangerine" ] ; then
+	export TERM=xterm
 fi
 
 # reminders
