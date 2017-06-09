@@ -106,7 +106,7 @@ if [ $OS = "Linux" ] ; then
 fi
 
 # hostname
-if [ $OS = "Linux" && $HOST = "tangerine" ] ; then
+if [ $OS = "Linux" ] && [ $HOST = "tangerine" ] ; then
 	export TERM=xterm
 fi
 
