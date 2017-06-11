@@ -15,7 +15,7 @@ TITLE=$MAGENTA
 
 log() {
 	tput setaf $1
-	printf "$2" | tee $DIR/backup.log
+	printf "$2" | tee -a $DIR/backup.log
 }
 
 # Configuration
