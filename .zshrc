@@ -154,4 +154,9 @@ fi
 
 alias vim="nvim"
 alias size="du -ch -d 1 2>/dev/null | sort -h"
+
+# use the syntax highlight script
+# if it's missing: yaourt -S zsh-syntax-highlighting
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
 # <3 from lemon
