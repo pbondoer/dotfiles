@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Upgrade
+Operation = Install
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Removing orphans...
+When = PostTransaction
+Exec = /bin/sh /etc/pacman.d/scripts/orphans.sh
