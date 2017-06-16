@@ -1,4 +1,10 @@
 #!/bin/sh
 
-pacman -Rs $(pacman -Qqdt) --noconfirm 2> /dev/null
-exit 0
+orphans=$(pacman -Qqdt)
+count=$(echo $orphans | wc -l)
+
+if [ $count = "0" ]
+then
+	echo "=> removing $count orphans"
+	pacman -Rs $(pacman -Qqdt) --noconfirm
+fi
