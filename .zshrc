@@ -84,7 +84,7 @@ export MAVEN_OPTS="-Xmx2048m -XX:MaxPermSize=196m"
 # prompt
 P_TIME='%F{blue}%B%D{%L:%M %p}%b%f'
 P_SSH=''
-if [ $SSH -eq 1 ]
+if [ "$SSH" = "1" ]
 then
 	P_SSH=' > %F{cyan}ssh%f'
 fi
@@ -119,7 +119,7 @@ then
 fi
 
 # use proper terminal when not on localhost
-if [ $SSH -eq 1 ]
+if [ "$SSH" = "1" ]
 then
 	export TERM=xterm
 fi
