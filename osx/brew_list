@@ -1,11 +1,9 @@
- neovim/neovim/neovim
- homebrew/dupes/grep
+ neovim
+ grep
+ make
  valgrind
  gist
- upx
- mutt
- keybase
- gnupg2
+ gnupg
  tig
  sl
  fortune
