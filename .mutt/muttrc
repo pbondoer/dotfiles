@@ -1,0 +1,33 @@
+# Folders
+set header_cache = "~/.mutt/cache/headers"
+set message_cachedir = "~/.mutt/cache/bodies"
+set certificate_file = "~/.mutt/certificates"
+
+# IMAP parameters
+set folder = "imaps://ssl0.ovh.net:993/"
+set imap_user = $MAIL
+mailboxes +INBOX
+set spoolfile = +INBOX
+set postponed = +INBOX/Drafts
+
+# Check all subscribed folders
+set imap_check_subscribed
+# Allow Mutt to open new imap connection automatically.
+unset imap_passive
+# Keep IMAP connection alive by polling intermittently (seconds)
+set imap_keepalive = 300
+# How often to check for new mail (seconds)
+set mail_check = 60
+
+# SMTP parameters
+set smtp_url = "smtp://$imap_user@ssl0.ovh.net:25/"
+set record = +Sent
+set ssl_starttls = yes
+set ssl_force_tls = yes
+set ssl_use_tlsv1 = yes
+
+# Personal
+set from = $MAIL
+set realname = 'Pierre Bondoerffer'
+set move = no
+set imap_keepalive = 900
