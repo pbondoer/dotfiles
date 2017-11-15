@@ -6,7 +6,9 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'kien/rainbow_parentheses.vim'
 Plug 'lepture/vim-velocity'
-Plug 'w0rp/ale'
+Plug 'leafgarland/typescript-vim'
+Plug 'posva/vim-vue'
+" Plug 'w0rp/ale'
 Plug 'pbondoer/vim-42header'
 call plug#end()
 
@@ -116,4 +118,5 @@ let g:airline_right_sep=''
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %severity% > %s'
+
 " <3 from lemon

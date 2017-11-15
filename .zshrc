@@ -67,7 +67,9 @@ bindkey "^[[3~" delete-char
 if [ $OS = "Linux" ]
 then
 	export MAIL="pierre@bondoer.fr"
-	export PATH="$HOME/bin:$PATH"
+	# android
+	export ANDROID_HOME=/opt/android-sdk
+	export PATH="$ANDROID_HOME/tools:$HOME/bin:$PATH"
 else
 	export MAIL="$USER@student.42.fr"
 	export PATH="$HOME/bin:$HOME/.brew/bin:$PATH"
