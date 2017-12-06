@@ -48,11 +48,10 @@ else
 	fi
 fi
 
-log $CYAN "Disk usage: "
 tput setaf $usage_color
 progress $used $total
-log $CYAN " used ("
+log $CYAN "\nUsed "
 log $usage_color "$(bytefmt used)"
 log $CYAN " out of "
 log $usage_color "$(bytefmt total)"
-log $CYAN ")\n"
+log $CYAN "\n"

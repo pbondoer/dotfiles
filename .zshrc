@@ -98,10 +98,6 @@ P_EXIT='%(?..%F{red} [%?]%f)'
 
 export PROMPT="$P_EXIT $P_TIME$P_SSH > ${P_USER} $P_HOST > $P_DIR$P_GIT %# "
 
-# fortune
-fortune ~/fortune
-echo ""
-
 # window titles
 if [ $OS = "Linux" ]
 then
@@ -120,10 +116,21 @@ then
 	esac
 fi
 
+# fortune
+fortune ~/fortune
+echo ""
+
 # use proper terminal when not on localhost
 if [ "$SSH" = "1" ]
 then
 	export TERM=xterm
+fi
+
+# show usage bar
+if [ -f ~/.usage.sh ]
+then
+	sh .usage.sh
+	echo ""
 fi
 
 # reminders
@@ -159,6 +166,8 @@ alias size="du -ch -d 1 2>/dev/null | sort -h"
 
 # use the syntax highlight script
 # if it's missing: yaourt -S zsh-syntax-highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ $OS = "Linux" ] ; then
+	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
 
 # <3 from lemon
