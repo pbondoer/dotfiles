@@ -44,7 +44,7 @@ item() {
 	total=$((total + size))
 	filelist=("${filelist[@]}" "${@:1}")
 	log $SIZE "$(bytefmt $size)\n"
-	for file in ${@:1}
+	for file in "${@:1}"
 	do
 		log $WHITE " -> "
 		log $SIZE "$file\n"
@@ -77,7 +77,11 @@ then
 fi
 
 log $DANGER "/!\\ WARNING - DANGER ZONE /!\\ \n"
-log $DANGER "This will erase ${#filelist[@]} files listed above.\n"
+log $DANGER "This will erase "
+log $SIZE "${#filelist[@]} files"
+log $DANGER " and free "
+log $SIZE "$(bytefmt $total)"
+log $DANGER ".\nPlease review the items above before continuing.\n"
 
 log $WHITE "\n"
 read -p "Continue (y/n)? " -n 1 -r
@@ -90,7 +94,7 @@ then
 fi
 
 log $STEP "Removing...\n"
-rm -rf ${filelist[@]}
+rm -rf "${filelist[@]}"
 
 log $SUCCESS "\nDone! Removed "
 log $SIZE "${#filelist[@]} files"
