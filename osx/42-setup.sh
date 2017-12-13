@@ -37,7 +37,7 @@ strfile ~/fortune/* > /dev/null
 
 log $STEP "Homebrew"
 rm -rf ~/.brew
-sh brew.sh
+sh ./osx/brew.sh
 
 log $STEP "vim"
 mkdir -p $HOME/.vim/backup
@@ -51,6 +51,10 @@ curl -fLo ~/.vim/autoload/plug.vim https://raw.github.com/junegunn/vim-plug/mast
 # header
 mkdir -p ~/.vim/plugin
 curl -fLo ~/.vim/plugin/42header.vim https://raw.github.com/pbondoer/vim-42header/master/42header.vim &> /dev/null
+# neovim symlinks
+mkdir -p $HOME/.config
+ln -s ~/.vim ~/.config/nvim
+ln -s ~/.vimrc ~/.config/nvim/init.vim
 
 log $STEP "Git"
 git config --global push.default simple
@@ -61,7 +65,7 @@ cp backup.sh ~
 cp .backup ~
 
 log $STEP "OSX"
-sh osx-42.sh
+sh ./osx/osx-42.sh
 
 log $GREEN "\nYour session is now configured, you will now be logged out.\n
 Thanks for all the fish ><>!"
