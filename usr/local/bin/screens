@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# ---------------------------------------------------------------------------- #
+# @name          screens
+# @description   Switch screen configurations
+# @author        pbondoer
+# @license       WTFPL
+# ---------------------------------------------------------------------------- #
+
+BLACK=0
+RED=1
+GREEN=2
+YELLOW=3
+BLUE=4
+MAGENTA=5
+CYAN=6
+WHITE=7
+GRAY=8
+
+log() {
+	tput setaf $1
+	printf "$2"
+}
+
+logn() {
+	tput setaf $1
+	printf "$2\n"
+}
+
+declare -a CONFIG
+declare -a COMMANDS
+
+# just some documentation
+SRC_LAPTOP="eDP1"
+SRC_HDMI="HDMI2"
+SRC_USBC="DP1"
+
+# declare our config
+while read line
+do
+	NAME="$(echo $line | cut -d '/' -f1)"
+	CMD="$(echo $line | cut -d '/' -f2)"
+
+	CONFIG+=( "$NAME" )
+	COMMANDS+=( "$CMD" )
+done << EOM
+laptop/xrandr --output DP1 --off --output HDMI2 --off --output eDP1 --mode 1920x1080 --pos 0x0
+desktop/xrandr --output DP1 --mode 1920x1080 --pos 0x0 --output HDMI2 --mode 1920x1080 --pos 1920x0 --output eDP1 --mode 1920x1080 --pos 960x1080
+dual/xrandr --output DP1 --off --output eDP1 --mode 1920x1080 --pos 0x0 --output HDMI2 --mode 1920x1080 --pos 1920x0
+project/xrandr --output DP1 --off --output HDMI2 --same-as eDP1
+project_only/xrandr --output DP1 --off --output HDMI2 --same-as eDP1 --output eDP1 --off
+EOM
+
+# default if no arguments
+SELECTED="desktop"
+
+# if an argument is passed
+if [ ! $# -eq 0 ]
+then
+	SELECTED=$1
+fi
+
+# check all possible configurations
+for i in $( seq 0 $(( ${#CONFIG[@]} - 1)) )
+do
+	if [ "${CONFIG[$i]}" = "$SELECTED" ]
+	then
+		SELECTED_CMD=${COMMANDS[$i]}
+		# display what we are running
+		logn $YELLOW "$SELECTED_CMD"
+
+		# run the command
+		$SELECTED_CMD
+
+		# bail out
+		exit 0
+	fi
+done
+
+# on appropriate config was found, display help
+printf      "Available screen configurations:\n"
+for i in "${CONFIG[@]}"
+do
+	logn $GREEN " - $i"
+done

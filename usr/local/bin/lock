@@ -1,16 +1,17 @@
-#!/usr/bin/env bash
+#!/bin/sh
 # Losely based on i3lock-fancy
 set -o errexit -o noclobber -o nounset
 
 EFFECT=(-filter Gaussian -resize 20% -define filter:sigma=10 -resize 500.5%)
 FONT="$(convert -list font | awk "{ a[NR] = \$2 } /family: $(fc-match sans -f "%{family}\n")/ { print a[NR-1]; exit }")"
-IMAGE="$(mktemp).png"
+IMAGE="$(mktemp)"
 TEXT="-- locked --"
 ICONPATH="/usr/local/share/i3lock-fancy"
 
 set -o pipefail
 trap 'rm -f "$IMAGE"' EXIT
 
+: <<"COMMENT"
 cp $WALLPAPER $IMAGE
 
 # figure out which the image's brightness
@@ -36,7 +37,9 @@ fi
 convert "$IMAGE" -gravity center -resize 1920x1080^ -extent 1920x1080 \
 	"${EFFECT[@]}" -font "$FONT" -pointsize 26 -fill "$BW" \
 	-annotate +0+160 "$TEXT" "$ICON" -composite "$IMAGE"
+COMMENT
 
 killall -SIGUSR1 dunst
-i3lock -n -i "$IMAGE"
+#i3lock -n -i "$IMAGE"
+i3lock -n -c "#000000"
 killall -SIGUSR2 dunst

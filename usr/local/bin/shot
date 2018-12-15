@@ -1,0 +1,66 @@
+#!/bin/bash
+
+# ---------------------------------------------------------------------------- #
+# @name          shot
+# @description   Screenshot utility + uplr
+# @author        pbondoer
+# @license       WTFPL
+# ---------------------------------------------------------------------------- #
+
+declare -a TYPES
+TYPES=(all window select)
+
+# default value
+if [ ! -z $1 ]
+then
+  TYPE=$1
+else
+  TYPE="all"
+fi
+
+BASE="$HOME/screenshots/$(date +%Y-%m-%d_%H%M%S)"
+FILE=$BASE.png
+PARAMS="-m 5 -b 1 -f png -q -u"
+
+
+# Find a suitable filename
+n=0
+while [ -f $FILE ]
+do
+  n=$((n + 1))
+  FILE="${BASE}_$n".png
+done
+
+# Perform a screenshot
+case $TYPE in
+  window)
+    active=$(xdotool getactivewindow)
+    maim -i $active $PARAMS $FILE
+    ;;
+  select)
+    maim -s $PARAMS $FILE
+    ;;
+  *) # all
+    maim $PARAMS $FILE
+    ;;
+esac
+
+if [ $? -eq 1 ]
+then
+  exit 0
+fi
+
+t_start=$(date +%s%3N)
+
+# Upload
+URL=$(uplr $FILE 2>/dev/null)
+
+# Get size and timing info
+SIZE=$(stat --printf="%s" $FILE | numfmt --to=iec-i)
+t_end=$(date +%s%3N)
+TIME=$(($t_end-$t_start))
+
+notify-send -a "uplr" "$URL (${SIZE}b, ${TIME}ms)"
+
+echo $URL
+echo $URL | xsel -b -i
