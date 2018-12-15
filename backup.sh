@@ -1,9 +1,21 @@
 #!/bin/sh
-source color.sh
 
-# backup.sh - Simple backup script
-# @author pbondoer
-# @license CC0 - https://creativecommons.org/publicdomain/zero/1.0
+# ---------------------------------------------------------------------------- #
+# @name          backup.sh
+# @description   Simple generic backup script
+# @author        pbondoer
+# @license       WTFPL
+# ---------------------------------------------------------------------------- #
+
+# Base colors
+BLACK=0
+RED=1
+GREEN=2
+YELLOW=3
+BLUE=4
+MAGENTA=5
+CYAN=6
+WHITE=7
 
 # Log message colors
 ERROR=$RED

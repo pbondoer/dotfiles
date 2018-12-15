@@ -1,5 +1,26 @@
 #!/bin/sh
-source ../color.sh
+
+# ---------------------------------------------------------------------------- #
+# @name          brew.sh
+# @description   Install packages from brew_list
+# @author        pbondoer
+# @license       WTFPL
+# ---------------------------------------------------------------------------- #
+
+# Base colors
+BLACK=0
+RED=1
+GREEN=2
+YELLOW=3
+BLUE=4
+MAGENTA=5
+CYAN=6
+WHITE=7
+
+log() {
+	tput setaf $1
+	printf "$2\n"
+}
 
 # Use proper directories
 export HOMEBREW_CACHE=/tmp/Homebrew/Caches

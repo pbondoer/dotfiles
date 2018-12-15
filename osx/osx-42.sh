@@ -1,23 +1,44 @@
 #!/bin/sh
-source color.sh
+
+# ---------------------------------------------------------------------------- #
+# @name          osx-42.sh
+# @description   Configure OS X settings for 42 sessions
+# @author        pbondoer
+# @license       WTFPL
+# ---------------------------------------------------------------------------- #
+
+# Base colors
+BLACK=0
+RED=1
+GREEN=2
+YELLOW=3
+BLUE=4
+MAGENTA=5
+CYAN=6
+WHITE=7
+
+log() {
+	tput setaf "$1"
+	printf "$2\n"
+}
+
+# Log colors
+STEP=$YELLOW
+CATEGORY=$GREEN
 
 # Script to configure a new session at 42.
 # Don't run this script without reading it first!
 
-# A lot of these were taken from @mathiasbynens' script.
-# https://github.com/mathiasbynens/dotfiles/blob/master/.osx
-# Some taken from here
-# https://gist.github.com/brandonb927/3195465
-
-STEP=$YELLOW
-CATEGORY=$GREEN
+# Based of these, plus some extra custom configuration:
+# - https://github.com/mathiasbynens/dotfiles/blob/master/.osx
+# - https://gist.github.com/brandonb927/3195465
 
 # -----------------------------------------------------------------------------
 # OSX preferences
 # -----------------------------------------------------------------------------
 log $CATEGORY "OSX preferences"
 
-log $STEP "Keyboard and mouse"
+log $STEP "* Keyboard and mouse"
 # Enable right-click
 defaults write com.apple.driver.AppleHIDMouse Button2 -int 2
 # Set mouse speed to 3
@@ -50,7 +71,7 @@ defaults write com.apple.HIToolbox AppleInputSourceHistory -array '<dict><key>In
 defaults write com.apple.HIToolbox AppleSelectedInputSources -array '<dict><key>InputSourceKind</key><string>KeyboardLayout</string><key>KeyboardLayoutID</key><integer>15000</integer><key>KeyboardLayoutName</key><string>USInternational-PC</string></dict>'
 killall SystemUIServer
 
-log $STEP "User interface"
+log $STEP "* User interface"
 # Enable Dark mode
 defaults write NSGlobalDomain AppleInterfaceStyle Dark
 # Always show scrollbars
@@ -63,7 +84,7 @@ defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
 # Disable Notification Center and remove the menu bar icon
 launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
 
-log $STEP "Spotlight"
+log $STEP "* Spotlight"
 # Change indexing order and disable some search results
 defaults write com.apple.spotlight orderedItems -array \
 	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
@@ -90,7 +111,7 @@ defaults write com.apple.spotlight orderedItems -array \
 	'{"enabled" = 0;"name" = "MENU_SPOTLIGHT_SUGGESTIONS";}'
 
 
-log $STEP "System"
+log $STEP "* System"
 # Save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 # Disable Resume system-wide
@@ -137,7 +158,7 @@ defaults write com.apple.systemuiserver menuExtras -array \
 	"/System/Library/CoreServices/Menu Extras/Clock.menu"
 killall SystemUIServer
 
-log $STEP "Screenshots"
+log $STEP "* Screenshots"
 # Save screenshots to a inside ~/screenshots
 mkdir -p $HOME/screenshots
 defaults write com.apple.screencapture location -string "${HOME}/screenshots"
@@ -152,7 +173,7 @@ defaults write com.apple.screencapture disable-shadow -bool true
 
 log $CATEGORY "OSX Applications"
 
-log $STEP "Finder"
+log $STEP "* Finder"
 # Finder: disable window animations and Get Info animations
 defaults write com.apple.finder DisableAllAnimations -bool true
 # Set ~ as the default location for new Finder windows
@@ -215,7 +236,7 @@ defaults write com.apple.finder FXInfoPanesExpanded -dict \
 # Enable text selection in QuickLook
 defaults write com.apple.finder QLEnableTextSelection -bool true
 
-log $STEP "Dock"
+log $STEP "* Dock"
 # Set the icon size of Dock items to 64 pixels
 defaults write com.apple.dock tilesize -int 64
 # Disable icon magnification
@@ -249,15 +270,15 @@ defaults write com.apple.dock mru-spaces -bool false
 defaults write com.apple.dock orientation -string "bottom"
 defaults write com.apple.dock pinning -string middle
 
-log $STEP "Terminal"
+log $STEP "* Terminal"
 # Only use UTF-8 in Terminal.app
 defaults write com.apple.terminal StringEncodings -array 4
 
-log $STEP "Time Machine"
+log $STEP "* Time Machine"
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
-log $STEP "Activity Monitor"
+log $STEP "* Activity Monitor"
 # Show the main window when launching Activity Monitor
 defaults write com.apple.ActivityMonitor OpenMainWindow -bool true
 # Visualize CPU usage in the Activity Monitor Dock icon
@@ -287,22 +308,22 @@ defaults write com.apple.ActivityMonitor DiskGraphType -int 1
 # Mavericks: Show Data in the Network graph (instead of packets)
 defaults write com.apple.ActivityMonitor NetworkGraphType -int 1
 
-log $STEP "Archive Utility"
+log $STEP "* Archive Utility"
 # Move archives to trash after extracting
 defaults write com.apple.archiveutility "dearchive-move-after" -string "~/.Trash"
 
-log $STEP "TextEdit"
+log $STEP "* TextEdit"
 # Use plain text mode for new TextEdit documents
 defaults write com.apple.TextEdit RichText -int 0
 # Open and save files as UTF-8 in TextEdit
 defaults write com.apple.TextEdit PlainTextEncoding -int 4
 defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
 
-log $STEP "Photos"
+log $STEP "* Photos"
 # Prevent Photos from opening automatically when devices are plugged in
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
 
-log $STEP "Safari"
+log $STEP "* Safari"
 # Prevent "Try the new Safari" notification
 defaults write com.apple.coreservices.uiagent CSUIHasSafariBeenLaunched -bool YES
 defaults write com.apple.coreservices.uiagent CSUIRecommendSafariNextNotificationDate -date 2050-01-01T00:00:00Z
@@ -348,12 +369,12 @@ defaults write com.apple.Safari CanPromptForPushNotifications -bool false
 # -----------------------------------------------------------------------------
 log $CATEGORY "Custom application preferences"
 
-log $STEP "Google Chrome"
+log $STEP "* Google Chrome"
 # Chrome: Allow installing user scripts via GitHub Gist or Userscripts.org
 defaults write com.google.Chrome ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
 defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://gist.githubusercontent.com/" "http://userscripts.org/*"
 
-log $STEP "Skype"
+log $STEP "* Skype"
 # Don't collapse chat view and sidebar
 defaults write com.skype.skype AutoCollapseChatView -bool false
 defaults write com.skype.skype AutoCollapseSidebar -bool false
@@ -367,15 +388,15 @@ defaults write com.skype.skype SKShowWelcomeTour -bool false
 defaults write com.skype.skype ShowDialpadOnLogin -bool false
 defaults write com.skype.skype DialpadOpen -bool false
 
-log $STEP "iTunes"
+log $STEP "* iTunes"
 # Prevent iTunes from taking control of play button
 launchctl unload -w /System/Library/LaunchAgents/com.apple.rcd.plist &> /dev/null
 
-log $STEP "Spotify"
+log $STEP "* Spotify"
 # Prevent Spotify from sleeping (AppNap disable)
 defaults write com.spotify.client NSAppSleepDisabled -bool YES
 
-log $STEP "iTerm 2"
+log $STEP "* iTerm 2"
 # Import our predefined profile
 defaults import com.googlecode.iterm2 iterm.plist
 # Don’t display the annoying prompt when quitting iTerm
@@ -389,7 +410,7 @@ defaults write com.googlecode.iterm2 AllowClipboardAccess -bool true
 # Opens files in new windows instead of a new tab
 defaults write com.googlecode.iterm2 OpenFileInNewWindows -bool true
 
-log $STEP "XCode"
+log $STEP "* XCode"
 # Always use tabs for indenting
 defaults write com.apple.dt.Xcode DVTTextIndentUsingTabs -bool true
 # Show tab bar

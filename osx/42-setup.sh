@@ -1,6 +1,28 @@
 #!/bin/sh
-source color.sh
 
+# ---------------------------------------------------------------------------- #
+# @name          42-setup.sh
+# @description   Set up a new session from this repository
+# @author        pbondoer
+# @license       WTFPL
+# ---------------------------------------------------------------------------- #
+
+# Base colors
+BLACK=0
+RED=1
+GREEN=2
+YELLOW=3
+BLUE=4
+MAGENTA=5
+CYAN=6
+WHITE=7
+
+log() {
+	tput setaf $1
+	printf "$2\n"
+}
+
+# Log message colors
 TITLE=$MAGENTA
 STEP=$CYAN
 

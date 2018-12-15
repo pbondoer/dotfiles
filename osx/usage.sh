@@ -1,6 +1,21 @@
 #!/bin/bash
 
-source color.sh
+# ---------------------------------------------------------------------------- #
+# @name          usage.sh
+# @description   Disk space usage bar
+# @author        pbondoer
+# @license       WTFPL
+# ---------------------------------------------------------------------------- #
+
+# Base colors
+BLACK=0
+RED=1
+GREEN=2
+YELLOW=3
+BLUE=4
+MAGENTA=5
+CYAN=6
+WHITE=7
 
 log() {
 	tput setaf $1
@@ -55,3 +70,5 @@ log $usage_color "$(bytefmt used)"
 log $CYAN " out of "
 log $usage_color "$(bytefmt total)"
 log $CYAN "\n"
+
+# vim: ft=zsh

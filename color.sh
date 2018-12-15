@@ -1,3 +1,5 @@
+# Kept for reference, but please don't depend on this file.
+
 # Color defaults
 
 BLACK=0
