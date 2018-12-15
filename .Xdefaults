@@ -4,19 +4,27 @@ dzen2.background:       #000000
 dzen2.foreground:       #ffffff
 
 ! -- urxvt
-urxvt*font:             xft:Inconsolata:pixelsize=14
+urxvt*font:             xft:DejaVu Sans Mono:pixelsize=12
+urxvt*letterSpace:      -1
 urxvt*scrollBar:        false
 urxvt*depth:            32
 
-! -- allows resize and clipboard stuff
-urxvt.perl-ext-common:  default,resize-font,clipboard
-urxvt.resize-font.smaller: C-Down
-urxvt.resize-font.bigger: C-Up
+! -- extensions for urxvt
+urxvt.perl-ext-common:  default,resize-font,clipboard,url-select
+! ---- resize-font
+urxvt.keysym.C-Down: resize-font:smaller
+urxvt.keysym.C-Up: resize-font:bigger
+! ---- url-select
+urxvt.keysym.M-u: perl:url-select:select_next
+urxvt.url-select.launcher: /usr/bin/xdg-open
+urxvt.url-select.underline: true
 
 ! -- colors
 ! Tango color scheme
 ! from: http://pastebin.com/7g882jCS
-urxvt*background:       #1d1d1d
+
+! urxvt*background:       #1d1d1d
+urxvt*background:       #000000
 urxvt*foreground:       #dedede
 urxvt*cursorColor:      #8ae234
 
