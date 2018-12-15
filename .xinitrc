@@ -39,6 +39,8 @@ xset r rate 250 35
 export WALLPAPER=~/photo/magosleep.jpg
 if [ -f $WALLPAPER ]; then
 	hsetroot -fill $WALLPAPER
+else
+	hsetroot -solid "#000000FF"
 fi
 
 # optirun and primusrun optimization
@@ -46,6 +48,6 @@ export VGL_READBACK=pbo
 export vblank_mode=0 # disable vsync
 
 # Run desktop environment
-exec compton --config ~/.config/compton.conf --blur-kern 7x7box &
+# exec compton --config ~/.config/compton.conf --blur-kern 7x7box &
 exec dunst &
 exec spectrwm
