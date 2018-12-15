@@ -1,14 +1,24 @@
 " plugins
 call plug#begin()
+" theme
 Plug 'tomasr/molokai'
+Plug 'kien/rainbow_parentheses.vim'
+" gutter
 Plug 'airblade/vim-gitgutter'
+" airline
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'kien/rainbow_parentheses.vim'
+" syntax
 Plug 'lepture/vim-velocity'
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
-" Plug 'w0rp/ale'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'cespare/vim-toml'
+Plug 'rust-lang/rust.vim'
+" checkers
+Plug 'w0rp/ale'
+" header
 Plug 'pbondoer/vim-42header'
 call plug#end()
 
@@ -37,10 +47,20 @@ set encoding=utf-8 " unicode!
 " syntax & indent
 syntax on " enable syntax highlighting
 filetype indent plugin on " file-type detection
-set shiftwidth=4 " shift by 4 every indent
-set softtabstop=4
-set tabstop=4 " display as 4 spaces
-set noexpandtab " use tabs, not spaces!
+
+" environment specific
+if $ENV ==? '42'
+	set shiftwidth=4 " shift by 4 every indent
+	set softtabstop=4
+	set tabstop=4 " display as 4 spaces
+	set noexpandtab " use tabs
+elseif $ENV ==? 'gandi'
+	set shiftwidth=2 " shift by 2 every indent
+	set softtabstop=2
+	set tabstop=2 " display as 2 spaces
+	set expandtab " use spaces
+endif
+
 set autoindent " auto-indent new lines
 set copyindent " copy indent from previous lines
 set shiftround " use multiple of shiftwidth when indenting with < and >
@@ -107,16 +127,51 @@ au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
 
+" plugin: javascript
+let g:javascript_plugin_flow = 1
+
+" jsx
+let g:jsx_ext_required = 0
+
 " pretty colors
 colorscheme molokai
 
+" airline
 let g:airline_theme = "molokai"
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let g:airline#extensions#ale#enabled = 1
 
+" ale
 let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %severity% > %s'
+let g:ale_linters = {
+\   'javascript': ['eslint', 'flow'],
+\   'markdown': ['markdownlint'],
+\   'rust': ['rls'],
+\}
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'markdown': ['prettier'],
+\   'scss': ['prettier'],
+\   'rust': ['rustfmt'],
+\}
+let g:ale_completion_enabled = 1
+
+let g:ale_close_preview_on_insert = 1
+" let g:ale_cursor_detail = 1
+
+let g:ale_lint_on_text_changed = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_insert_leave = 1
+
+" ale_rust
+let g:ale_rust_cargo_check_tests = 1
+let g:ale_rust_rls_toolchain = 'stable'
+
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
 
 " <3 from lemon
