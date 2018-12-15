@@ -1,0 +1,6 @@
+# 42
+export USER="pbondoer"
+export MAIL="$USER@student.42.fr"
+export NAME="Pierre Bondoerffer"
+
+# vim: ft=sh
