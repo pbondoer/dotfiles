@@ -12,9 +12,9 @@ export ENV=`sh $HOME/.env.sh`
 function chpwd {
 	prev_env=$ENV
 
-	export ENV=`sh $HOME/.env.sh`
+	export ENV=`sh $HOME/.env.sh | tr '[:upper:]' '[:lower:]'`
 
-	rcfile=$HOME/.${ENV,,}rc
+	rcfile=$HOME/.${ENV}rc
 	if [ $ENV != $prev_env ] && [ -f $rcfile ]
 	then
 		source $rcfile
