@@ -68,7 +68,6 @@ setopt share_history
 setopt extended_glob
 
 # autocomplete
-fpath+=$HOME/.zcomp
 autoload -Uz compinit
 compinit
 
