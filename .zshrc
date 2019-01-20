@@ -7,6 +7,16 @@ then
   SSH=1
 fi
 
+source_envrc() {
+  rcfile=$HOME/.${ENV}rc
+  if [ -f $rcfile ]
+  then
+    source $rcfile
+    git config --global user.name $NAME
+    git config --global user.email $MAIL
+  fi
+}
+
 # load environment
 export ENV=`sh $HOME/.env.sh`
 function chpwd {
@@ -14,13 +24,14 @@ function chpwd {
 
   export ENV=`sh $HOME/.env.sh | tr '[:upper:]' '[:lower:]'`
 
-  rcfile=$HOME/.${ENV}rc
-  if [ $ENV != $prev_env ] && [ -f $rcfile ]
+  if [ $ENV != $prev_env ]
   then
-    source $rcfile
+    source_envrc
   fi
-
 }
+
+# source it now
+source_envrc
 
 # locale
 export LC_ALL=en_US.utf-8 
