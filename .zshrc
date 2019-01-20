@@ -4,21 +4,21 @@ HOST=`hostname`
 # SSH check
 if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]
 then
-	SSH=1
+  SSH=1
 fi
 
 # load environment
 export ENV=`sh $HOME/.env.sh`
 function chpwd {
-	prev_env=$ENV
+  prev_env=$ENV
 
-	export ENV=`sh $HOME/.env.sh | tr '[:upper:]' '[:lower:]'`
+  export ENV=`sh $HOME/.env.sh | tr '[:upper:]' '[:lower:]'`
 
-	rcfile=$HOME/.${ENV}rc
-	if [ $ENV != $prev_env ] && [ -f $rcfile ]
-	then
-		source $rcfile
-	fi
+  rcfile=$HOME/.${ENV}rc
+  if [ $ENV != $prev_env ] && [ -f $rcfile ]
+  then
+    source $rcfile
+  fi
 
 }
 
@@ -69,7 +69,7 @@ setopt complete_in_word
 
 if [ $OS = "Linux" ]
 then
-	compdef _pacman yay=pacman
+  compdef _pacman yay=pacman
 fi
 
 zstyle ':completion:*' completer _complete _ignored _approximate
@@ -84,13 +84,13 @@ bindkey "^[[3~" delete-char
 # variables
 if [ $OS = "Linux" ]
 then
-	export XDG_CONFIG_HOME=$HOME/.config
-	# android
-	export ANDROID_HOME=/opt/android-sdk
-	export PATH="$ANDROID_HOME/tools:$PATH"
+  export XDG_CONFIG_HOME=$HOME/.config
+  # android
+  export ANDROID_HOME=/opt/android-sdk
+  export PATH="$ANDROID_HOME/tools:$PATH"
 elif [ $OS = "Darwin" ]; then
-	# brew
-	export PATH="$HOME/.brew/bin:$PATH"
+  # brew
+  export PATH="$HOME/.brew/bin:$PATH"
 fi
 
 # rust
@@ -110,7 +110,7 @@ P_TIME='%F{blue}%B%D{%L:%M %p}%b%f'
 P_SSH=''
 if [ "$SSH" = "1" ]
 then
-	P_SSH=' > %F{cyan}ssh%f'
+  P_SSH=' > %F{cyan}ssh%f'
 fi
 P_USER='%F{red}%B%n%b%f'
 P_HOST='%F{green}%B%U%m%u%b%f'
@@ -124,19 +124,19 @@ export NVM_DIR="$HOME/.nvm"
 # window titles
 if [ $OS = "Linux" ]
 then
-	function xterm_precmd() {
-		print -Pn "\e]0;$TERM - [%n@%M]%# [%$HOME]\a"
-	}
-	function xterm_preexec() {
-		print -Pn "\e]0;$TERM - [%n@%M]%# [%$HOME] ($1)\a"
-	}
+  function xterm_precmd() {
+    print -Pn "\e]0;$TERM - [%n@%M]%# [%$HOME]\a"
+  }
+  function xterm_preexec() {
+    print -Pn "\e]0;$TERM - [%n@%M]%# [%$HOME] ($1)\a"
+  }
 
-	case $TERM in
-		*xterm*|rxvt*|(dt|k|E)term)
-			add-zsh-hook -Uz precmd xterm_precmd
-			add-zsh-hook -Uz preexec xterm_preexec
-			;;
-	esac
+  case $TERM in
+    *xterm*|rxvt*|(dt|k|E)term)
+      add-zsh-hook -Uz precmd xterm_precmd
+      add-zsh-hook -Uz preexec xterm_preexec
+      ;;
+  esac
 fi
 
 # fortune
@@ -146,27 +146,27 @@ echo ""
 # use proper terminal when on SSH
 if [ "$SSH" = "1" ]
 then
-	export TERM=xterm
+  export TERM=xterm
 fi
 
 # show usage bar
 if [ -f $HOME/.usage.sh ]
 then
-	sh $HOME/.usage.sh
-	echo ""
+  sh $HOME/.usage.sh
+  echo ""
 fi
 
 # reminders
 if [ -f $HOME/.reminders ]
 then
-	reminder_lines=`wc -l < $HOME/.reminders | tr -d ' \t\n\r\f'`
-	tput setaf 8
-	echo "--- You have [$reminder_lines] reminders"
-	tput setaf 7
-	while read line; do
-		echo "*" $line
-	done < $HOME/.reminders
-	echo ""
+  reminder_lines=`wc -l < $HOME/.reminders | tr -d ' \t\n\r\f'`
+  tput setaf 8
+  echo "--- You have [$reminder_lines] reminders"
+  tput setaf 7
+  while read line; do
+    echo "*" $line
+  done < $HOME/.reminders
+  echo ""
 fi
 
 # aliases
@@ -177,35 +177,35 @@ alias size="du -ch -d 1 2>/dev/null | sort -h"
 
 if [ $OS = "Linux" ]
 then
-	alias make="make -j 8"
-	alias ff="firefox-developer-edition"
-	alias firefox-developer="firefox-developer-edition"
-	alias feh="feh -d" # Draw filename at the top of the feh window
-	alias ls="ls --color"
-	alias grep="grep --color"
+  alias make="make -j 8"
+  alias ff="firefox-developer-edition"
+  alias firefox-developer="firefox-developer-edition"
+  alias feh="feh -d" # Draw filename at the top of the feh window
+  alias ls="ls --color"
+  alias grep="grep --color"
 elif [ $OS = "Darwin" ]
 then
-	alias sort="gsort"
-	alias make="gmake -j 8"
-	alias gpg="gpg2"
-	alias love="$HOME/bin/love.app/Contents/MacOS/love"
+  alias sort="gsort"
+  alias make="gmake -j 8"
+  alias gpg="gpg2"
+  alias love="$HOME/bin/love.app/Contents/MacOS/love"
 fi
 
 # use the syntax highlight script
 if [ $OS = "Linux" ]
 then
-	# yay -S zsh-syntax-highlighting
-	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  # yay -S zsh-syntax-highlighting
+  source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 elif [ $OS = "Darwin" ]
 then
-	# brew install zsh-syntax-highlighting
-	source /Users/$USER/.brew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  # brew install zsh-syntax-highlighting
+  source /Users/$USER/.brew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # NVM
 if [ $OS = "Linux" ]
 then
-	source /usr/share/nvm/init-nvm.sh
+  source /usr/share/nvm/init-nvm.sh
 fi
 
 # <3 from lemon
