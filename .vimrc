@@ -150,7 +150,7 @@ let g:ale_echo_msg_format = '[%linter%] %severity% > %s'
 let g:ale_linters = {
 \   'javascript': ['eslint', 'flow'],
 \   'markdown': ['markdownlint'],
-\   'rust': ['rls'],
+\   'rust': ['rls', 'cargo'],
 \}
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
@@ -168,6 +168,7 @@ let g:ale_lint_on_save = 1
 let g:ale_lint_on_insert_leave = 1
 
 " ale_rust
+let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')
 let g:ale_rust_cargo_check_tests = 1
 let g:ale_rust_rls_toolchain = 'stable'
 
