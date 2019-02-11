@@ -167,8 +167,15 @@ then
   echo ""
 fi
 
-# weather
-curl "wttr.in/Paris, France?0Q"
+# weather (cached for 2 hours)
+wttr=$HOME/.cache/weather
+if [[ ! -f $wttr || -n `find $wttr -mmin +120` ]]
+then
+  echo "Fetching weather"
+  curl -s "wttr.in/Paris, France?0Q" > $wttr
+fi
+
+cat $wttr
 echo ""
 
 # reminders
