@@ -222,6 +222,17 @@ export NVM_DIR="$HOME/.nvm"
 
 if [ $OS = "Linux" ]
 then
+  # commands
+  nvm_list=('node' 'npm' 'npx' 'yarn')
+  # global node_modules
+  nvm_list+=('glow' 'npm-check' 'svgo' 'jest-codemods')
+
+  # this tricks zsh-syntax-highlighting into thinking it exists
+  for item in $nvm_list
+  do
+    eval "alias $item=$item"
+  done
+
   # preload NVM executable only
   source /usr/share/nvm/nvm.sh --no-use
 
@@ -234,8 +245,19 @@ then
 
     t_start=$(date +%s%3N)
 
+    # source and perform `nvm use`
     source /usr/share/nvm/init-nvm.sh
 
+    # removes the hack above, so that `which` gives us the correct output
+    for item in $nvm_list
+    do
+      unalias $item
+    done
+
+    # remove the hook
+    add-zsh-hook -d preexec nvm_preexec
+
+    # display the time it took to do all this
     t_end=$(date +%s%3N)
     t_total=$(($t_end-$t_start))
 
@@ -246,8 +268,6 @@ then
   }
 
   function nvm_preexec() {
-    nvm_list=('nvm' 'node' 'npm' 'npx' 'yarn' 'glow')
-
     for item in $nvm_list
     do
       if [[ $1 == "$item"* ]]; then
