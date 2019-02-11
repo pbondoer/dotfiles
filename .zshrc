@@ -77,6 +77,9 @@ compdef _gnu_generic gdb
 compdef _git git
 setopt complete_in_word
 
+# report cpu usage and time for long commands (seconds)
+REPORTTIME=10
+
 if [ $OS = "Linux" ]
 then
   compdef _pacman yay=pacman
