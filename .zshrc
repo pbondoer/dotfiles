@@ -135,10 +135,10 @@ export NVM_DIR="$HOME/.nvm"
 if [ $OS = "Linux" ]
 then
   function xterm_precmd() {
-    print -Pn "\e]0;$TERM - [%n@%M]%# [%$HOME]\a"
+    print -Pn "\e]0;[%n@%M]%# \a"
   }
   function xterm_preexec() {
-    print -Pn "\e]0;$TERM - [%n@%M]%# [%$HOME] ($1)\a"
+    print -Pn "\e]0;[%n@%M]%# $1\a"
   }
 
   case $TERM in
@@ -174,9 +174,9 @@ echo ""
 if [ -f $HOME/.reminders ]
 then
   reminder_lines=`wc -l < $HOME/.reminders | tr -d ' \t\n\r\f'`
-  tput setaf 8
+  tput setaf 8 # gray
   echo "--- You have [$reminder_lines] reminders"
-  tput setaf 7
+  tput setaf 7 # white
   while read line; do
     echo "*" $line
   done < $HOME/.reminders
@@ -219,7 +219,45 @@ fi
 # NVM
 if [ $OS = "Linux" ]
 then
-  source /usr/share/nvm/init-nvm.sh
+  # preload NVM executable only
+  source /usr/share/nvm/nvm.sh --no-use
+
+  # load NVM dynamically when needed
+  function nvm_init() {
+    if [[ `type node` == *nvm* ]]
+    then
+      return
+    fi
+
+    tput setaf 3 # yellow
+    printf "[nvm] Loading... "
+
+    t_start=$(date +%s%3N)
+
+    source /usr/share/nvm/init-nvm.sh
+
+    t_end=$(date +%s%3N)
+    t_total=$(($t_end-$t_start))
+
+    tput setaf 6 # cyan
+    printf "${t_total}ms"
+    echo ""
+    tput setaf 7 # white
+  }
+
+  function nvm_preexec() {
+    nvm_list=('nvm' 'node' 'npm' 'npx' 'yarn' 'glow')
+
+    for item in $nvm_list
+    do
+      if [[ $1 == "$item"* ]]; then
+        nvm_init
+        return
+      fi
+    done
+  }
+
+  add-zsh-hook -Uz preexec nvm_preexec
 fi
 
 # <3 from lemon
