@@ -12,7 +12,8 @@ urxvt*font:             xft:DejaVu Sans Mono:pixelsize=12
 urxvt*letterSpace:      -1
 urxvt*scrollBar:        false
 urxvt*depth:            32
-URxvt*fading:           35
+urxvt*fading:           35
+urxvt*saveLines:        65535
 
 ! -- extensions for urxvt
 urxvt.perl-ext-common:  default,resize-font,clipboard,url-select
