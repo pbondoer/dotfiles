@@ -166,6 +166,10 @@ then
   echo ""
 fi
 
+# weather
+curl "wttr.in/Paris, France?0Q"
+echo ""
+
 # reminders
 if [ -f $HOME/.reminders ]
 then
