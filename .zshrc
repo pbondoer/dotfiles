@@ -129,8 +129,6 @@ P_GIT='%F{yellow}%B${vcs_info_msg_0_}%b%f'
 
 export PROMPT="$P_EXIT$P_ENV $P_TIME$P_SSH > ${P_USER} $P_HOST > $P_DIR$P_GIT %# "
 
-export NVM_DIR="$HOME/.nvm"
-
 # window titles
 if [ $OS = "Linux" ]
 then
@@ -217,6 +215,8 @@ then
 fi
 
 # NVM
+export NVM_DIR="$HOME/.nvm"
+
 if [ $OS = "Linux" ]
 then
   # preload NVM executable only
@@ -224,10 +224,7 @@ then
 
   # load NVM dynamically when needed
   function nvm_init() {
-    if [[ `type node` == *nvm* ]]
-    then
-      return
-    fi
+    [[ -n $NVM_BIN ]] && return
 
     tput setaf 3 # yellow
     printf "[nvm] Loading... "
