@@ -1,3 +1,7 @@
+! -- cursor size fix
+Xcursor.size:           16
+Xcursor.theme:          ''
+
 ! -- dzen2 configuration
 dzen2.font:             xft:DejaVu Sans Mono:pixelsize=12
 dzen2.background:       #000000
