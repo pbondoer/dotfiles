@@ -9,11 +9,13 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " syntax
+Plug 'sheerun/vim-polyglot'
+
 Plug 'lepture/vim-velocity'
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
 Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
+Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
 " checkers
@@ -131,7 +133,10 @@ au Syntax * RainbowParenthesesLoadBraces
 let g:javascript_plugin_flow = 1
 
 " jsx
-let g:jsx_ext_required = 0
+let g:vim_jsx_pretty_colorful_config = 1
+
+" polyglot
+let g:polyglot_disabled = ['markdown', 'jsx']
 
 " pretty colors
 colorscheme molokai
