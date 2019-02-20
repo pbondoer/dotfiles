@@ -255,7 +255,7 @@ then
   # this tricks zsh-syntax-highlighting into thinking it exists
   for item in $nvm_list
   do
-    eval "alias $item=$item"
+    alias $item="nvm_init && $item"
   done
 
   # preload NVM executable only
@@ -279,9 +279,6 @@ then
       unalias $item
     done
 
-    # remove the hook
-    add-zsh-hook -d preexec nvm_preexec
-
     # display the time it took to do all this
     t_end=$(date +%s%3N)
     t_total=$(($t_end-$t_start))
@@ -291,18 +288,6 @@ then
     echo ""
     tput setaf 7 # white
   }
-
-  function nvm_preexec() {
-    for item in $nvm_list
-    do
-      if [[ $1 == "$item"* ]]; then
-        nvm_init
-        return
-      fi
-    done
-  }
-
-  add-zsh-hook -Uz preexec nvm_preexec
 fi
 
 # <3 from lemon
