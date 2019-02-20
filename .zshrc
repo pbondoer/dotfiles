@@ -169,10 +169,28 @@ fi
 
 # weather (cached for 2 hours)
 wttr=$HOME/.cache/weather
-if [[ ! -f $wttr || -n `find $wttr -mmin +120` ]]
+
+if [[ ! -f $wttr || -n `find $wttr -mmin +120` || `du -k $wttr | cut -f1` == 0 ]]
 then
-  echo "Fetching weather"
+  tput sc # save cursor
+  tput setaf 8 # gray
+
+  # placeholder while loaidng...
+  if [[ -f $wttr && `du -k $wttr | cut -f1` != 0 ]]
+  then
+    cat $wttr | sed 's/\x1b\[[0-9;]*m//g'
+  else
+    echo "   .........   -------   "
+    echo "   .........   --- °C    "
+    echo "   .........   - -- km/h "
+    echo "   .........   -- km     "
+    echo "   .........   -.- mm    "
+  fi
+
   curl -s "wttr.in/Paris, France?0Q" > $wttr
+
+  tput rc # reset cursor
+  tput ed # clear everything
 fi
 
 cat $wttr
