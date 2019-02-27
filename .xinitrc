@@ -49,5 +49,6 @@ export vblank_mode=0 # disable vsync
 
 # Run desktop environment
 # exec compton --config ~/.config/compton.conf --blur-kern 7x7box &
+eval "$(ssh-agent)" &
 exec dunst &
 exec spectrwm
