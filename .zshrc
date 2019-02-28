@@ -250,7 +250,7 @@ then
   # commands
   nvm_list=('node' 'npm' 'npx' 'yarn')
   # global node_modules
-  nvm_list+=('glow' 'npm-check' 'svgo' 'jest-codemods')
+  nvm_list+=('glow' 'npm-check' 'svgo' 'jest-codemods' 'source-map-explorer')
 
   # this tricks zsh-syntax-highlighting into thinking it exists
   for item in $nvm_list
