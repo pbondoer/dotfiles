@@ -156,6 +156,8 @@ let g:ale_linters = {
 \   'javascript': ['eslint', 'flow'],
 \   'markdown': ['markdownlint'],
 \   'rust': ['rls', 'cargo'],
+\   'bash': ['shellcheck'],
+\   'sh': ['shellcheck'],
 \}
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
