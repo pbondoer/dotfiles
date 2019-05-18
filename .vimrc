@@ -131,6 +131,7 @@ au Syntax * RainbowParenthesesLoadBraces
 
 " plugin: javascript
 let g:javascript_plugin_flow = 1
+let g:javascript_plugin_jsdoc = 1
 
 " jsx
 let g:vim_jsx_pretty_colorful_config = 1
@@ -154,6 +155,7 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %severity% > %s'
 let g:ale_linters = {
 \   'javascript': ['eslint', 'flow'],
+\   'typescript': ['tslint'],
 \   'markdown': ['markdownlint'],
 \   'rust': ['rls', 'cargo'],
 \   'bash': ['shellcheck'],
@@ -161,6 +163,7 @@ let g:ale_linters = {
 \}
 let g:ale_fixers = {
 \   'javascript': ['prettier'],
+\   'typescript': ['prettier'],
 \   'markdown': ['prettier'],
 \   'scss': ['prettier'],
 \   'rust': ['rustfmt'],
