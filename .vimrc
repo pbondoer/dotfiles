@@ -11,7 +11,6 @@ Plug 'vim-airline/vim-airline-themes'
 " syntax
 Plug 'sheerun/vim-polyglot'
 
-Plug 'lepture/vim-velocity'
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
 Plug 'pangloss/vim-javascript'
