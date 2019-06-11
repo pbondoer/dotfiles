@@ -9,16 +9,32 @@ Plug 'airblade/vim-gitgutter'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 " syntax
+"   jsx-pretty BEFORE polyglot
+"   https://github.com/MaxMEllon/vim-jsx-pretty/issues/69
+Plug 'MaxMEllon/vim-jsx-pretty'
+
 Plug 'sheerun/vim-polyglot'
 
 Plug 'leafgarland/typescript-vim'
 Plug 'posva/vim-vue'
 Plug 'pangloss/vim-javascript'
-Plug 'MaxMEllon/vim-jsx-pretty'
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
 " checkers
 Plug 'w0rp/ale'
+" autocomplete
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+Plug 'wokalski/autocomplete-flow'
+" neosnippets
+Plug 'Shougo/neosnippet.vim'
+Plug 'Shougo/neosnippet-snippets'
+Plug 'pbondoer/vim-snippets'
 " header
 Plug 'pbondoer/vim-42header'
 call plug#end()
@@ -31,8 +47,8 @@ noremap <Right> <Nop>
 
 " stuff i can't put in a category
 if !has('nvim')
-	set nocompatible " needed for plug in vim
-	set ttyfast " make vim faster if using vim
+  set nocompatible " needed for plug in vim
+  set ttyfast " make vim faster if using vim
 endif
 
 set backspace=indent,eol,start " fix backspace
@@ -51,15 +67,15 @@ filetype indent plugin on " file-type detection
 
 " environment specific
 if $ENV ==? '42'
-	set shiftwidth=4 " shift by 4 every indent
-	set softtabstop=4
-	set tabstop=4 " display as 4 spaces
-	set noexpandtab " use tabs
+  set shiftwidth=4 " shift by 4 every indent
+  set softtabstop=4
+  set tabstop=4 " display as 4 spaces
+  set noexpandtab " use tabs
 elseif $ENV ==? 'gandi'
-	set shiftwidth=2 " shift by 2 every indent
-	set softtabstop=2
-	set tabstop=2 " display as 2 spaces
-	set expandtab " use spaces
+  set shiftwidth=2 " shift by 2 every indent
+  set softtabstop=2
+  set tabstop=2 " display as 2 spaces
+  set expandtab " use spaces
 endif
 
 set autoindent " auto-indent new lines
@@ -87,7 +103,7 @@ set smartcase " smart-case searching
 set backupdir=~/.vim/backup
 set directory=~/.vim/swap
 if exists("&undodir")
-	set undodir=~/.vim/undo
+  set undodir=~/.vim/undo
 endif
 autocmd BufLeave,FocusLost * silent! wall " autosave when losing focus
 set autowriteall " save upon switching buffers
@@ -116,17 +132,34 @@ nnoremap <C-L> :nohl<CR><C-L>
 
 " relative numbers
 if exists('+relativenumber')
-	set rnu
-	autocmd InsertEnter * :set nornu
-	autocmd InsertLeave * :set rnu
+  set rnu
+  autocmd InsertEnter * :set nornu
+  autocmd InsertLeave * :set rnu
 endif
-set rnu
 
-" plugin: rainbow parantheses 
+" plugin: rainbow parantheses
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
 au Syntax * RainbowParenthesesLoadSquare
 au Syntax * RainbowParenthesesLoadBraces
+
+let g:rbpt_colorpairs = [
+      \ ['red',         'firebrick3'],
+      \ ['brown',       'RoyalBlue3'],
+      \ ['Darkblue',    'SeaGreen3'],
+      \ ['darkgray',    'DarkOrchid3'],
+      \ ['darkgreen',   'firebrick3'],
+      \ ['darkcyan',    'RoyalBlue3'],
+      \ ['darkred',     'SeaGreen3'],
+      \ ['darkmagenta', 'DarkOrchid3'],
+      \ ['brown',       'firebrick3'],
+      \ ['gray',        'RoyalBlue3'],
+      \ ['darkmagenta', 'DarkOrchid3'],
+      \ ['Darkblue',    'firebrick3'],
+      \ ['darkgreen',   'RoyalBlue3'],
+      \ ['darkcyan',    'SeaGreen3'],
+      \ ['darkred',     'DarkOrchid3'],
+      \ ]
 
 " plugin: javascript
 let g:javascript_plugin_flow = 1
@@ -136,10 +169,12 @@ let g:javascript_plugin_jsdoc = 1
 let g:vim_jsx_pretty_colorful_config = 1
 
 " polyglot
-let g:polyglot_disabled = ['markdown', 'jsx']
+let g:polyglot_disabled = ['markdown', 'jsx', 'rust', 'toml']
 
 " pretty colors
-colorscheme molokai
+if !empty(globpath(&rtp, 'colors/molokai.vim'))
+  colorscheme molokai
+endif
 
 " airline
 let g:airline_theme = "molokai"
@@ -153,24 +188,24 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %severity% > %s'
 let g:ale_linters = {
-\   'javascript': ['eslint', 'flow'],
-\   'typescript': ['tslint'],
-\   'markdown': ['markdownlint'],
-\   'rust': ['rls', 'cargo'],
-\   'bash': ['shellcheck'],
-\   'sh': ['shellcheck'],
-\}
+      \   'javascript': ['eslint', 'flow'],
+      \   'typescript': ['tslint'],
+      \   'markdown': ['markdownlint'],
+      \   'rust': ['rls', 'cargo'],
+      \   'bash': ['shellcheck'],
+      \   'sh': ['shellcheck'],
+      \ }
 let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\   'typescript': ['prettier'],
-\   'markdown': ['prettier'],
-\   'scss': ['prettier'],
-\   'rust': ['rustfmt'],
-\}
+      \   'javascript': ['prettier'],
+      \   'typescript': ['prettier'],
+      \   'markdown': ['prettier'],
+      \   'scss': ['prettier'],
+      \   'rust': ['rustfmt'],
+      \   'vim': ['remove_trailing_lines', 'trim_whitespace'],
+      \ }
 let g:ale_completion_enabled = 1
 
 let g:ale_close_preview_on_insert = 1
-" let g:ale_cursor_detail = 1
 
 let g:ale_lint_on_text_changed = 1
 let g:ale_lint_on_save = 1
@@ -181,7 +216,19 @@ let g:ale_rust_cargo_use_clippy = executable('cargo-clippy')
 let g:ale_rust_cargo_check_tests = 1
 let g:ale_rust_rls_toolchain = 'stable'
 
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
+" python support
+let g:python_host_prog = '/usr/bin/python2'
+let g:python3_host_prog = '/usr/bin/python3'
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
+" neosnippet
+imap <c-k> <Plug>(neosnippet_expand_or_jump)
+smap <c-k> <Plug>(neosnippet_expand_or_jump)
+xmap <c-k> <Plug>(neosnippet_expand_target)
+vmap <c-k> <Plug>(neosnippet_expand_target)
+
+let g:neosnippet#snippets_directory = globpath(&rtp, 'snippets')
 
 " <3 from lemon
