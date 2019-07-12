@@ -242,6 +242,14 @@ then
   source /Users/$USER/.brew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
+# ssh-agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+  ssh-agent > ~/.ssh-agent
+fi
+if [[ ! "$SSH_AUTH_SOCK" ]]; then
+  eval "$(<~/.ssh-agent)" > /dev/null
+fi
+
 # NVM
 export NVM_DIR="$HOME/.nvm"
 
