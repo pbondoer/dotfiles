@@ -34,7 +34,7 @@ function chpwd {
 source_envrc
 
 # locale
-export LC_ALL=en_US.utf-8 
+export LC_ALL=en_US.UTF-8
 export LANG="$LC_ALL"
 
 # misc options
@@ -114,10 +114,11 @@ fi
 
 # rust
 export PATH="$HOME/.cargo/bin:$PATH"
+# yarn
+export PATH="$HOME/.yarn/bin:$PATH"
 # global bin
 export PATH="$HOME/bin:$PATH"
 
-export USER="pbondoer"
 export EDITOR="nvim"
 export GPG_TTY=$(tty)
 export CLICOLOR=1
