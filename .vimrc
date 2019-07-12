@@ -65,13 +65,18 @@ set encoding=utf-8 " unicode!
 syntax on " enable syntax highlighting
 filetype indent plugin on " file-type detection
 
-" environment specific
+set shiftwidth=2 " shift by 2 every indent
+set softtabstop=2
+set tabstop=2 " display as 2 spaces
+set expandtab " use spaces
+
+" environment specific overrides
 if $ENV ==? '42'
   set shiftwidth=4 " shift by 4 every indent
   set softtabstop=4
   set tabstop=4 " display as 4 spaces
   set noexpandtab " use tabs
-elseif $ENV ==? 'gandi'
+elseif $ENV ==? $WORK_ENV
   set shiftwidth=2 " shift by 2 every indent
   set softtabstop=2
   set tabstop=2 " display as 2 spaces
