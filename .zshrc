@@ -14,6 +14,7 @@ source_envrc() {
     source $rcfile
     git config --global user.name $NAME
     git config --global user.email $MAIL
+    git config --global user.signingkey $PGP_KEY
   fi
 }
 
