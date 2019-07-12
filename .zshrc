@@ -98,9 +98,15 @@ bindkey "^[[3~" delete-char
 if [ $OS = "Linux" ]
 then
   export XDG_CONFIG_HOME=$HOME/.config
+
   # android
   export ANDROID_HOME=/opt/android-sdk
-  export PATH="$ANDROID_HOME/tools:$PATH"
+
+  ANDROID_PATH="$ANDROID_HOME/tools"
+  ANDROID_PATH="$ANDROID_HOME/tools/bin:$ANDROID_PATH"
+  ANDROID_PATH="$ANDROID_HOME/platform-tools:$ANDROID_PATH"
+
+  export PATH="$ANDROID_PATH:$PATH"
 elif [ $OS = "Darwin" ]; then
   # brew
   export PATH="$HOME/.brew/bin:$PATH"
