@@ -1,0 +1,10 @@
+#!/bin/bash
+
+case "$2" in
+  CONNECTED)
+    notify-send -a "wpa_supplicant" "Connection established";
+    ;;
+  DISCONNECTED)
+    notify-send -a "wpa_supplicant" "Connection lost";
+    ;;
+esac
