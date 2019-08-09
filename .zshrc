@@ -198,14 +198,17 @@ then
     echo "   .........   -.- mm    "
   fi
 
-  curl -s "wttr.in/Paris, France?0Q" > $wttr
+  curl -s "wttr.in/Paris, France?0Q" --max-time 1 > $wttr
 
   tput rc # reset cursor
   tput ed # clear everything
 fi
 
-cat $wttr
-echo ""
+if [[ -f $wttr ]]
+then
+  cat $wttr
+  echo ""
+fi
 
 # reminders
 if [ -f $HOME/.reminders ]
