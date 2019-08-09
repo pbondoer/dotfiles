@@ -237,6 +237,7 @@ then
   alias feh="feh -d" # Draw filename at the top of the feh window
   alias ls="ls --color"
   alias grep="grep --color"
+  alias eth="sudo ip link set enp0s31f6 up && sudo dhcpcd"
 elif [ $OS = "Darwin" ]
 then
   alias sort="gsort"
