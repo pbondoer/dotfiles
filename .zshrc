@@ -227,6 +227,7 @@ fi
 alias dc="docker-compose"
 alias fig="docker-compose"
 alias vim="nvim"
+alias k="kubectl"
 alias size="du -ch -d 1 2>/dev/null | sort -h"
 
 if [ $OS = "Linux" ]
