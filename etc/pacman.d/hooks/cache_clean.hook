@@ -1,11 +1,10 @@
 [Trigger]
 Operation = Upgrade
 Operation = Install
-Operation = Remove
 Type = Package
 Target = *
 
 [Action]
 Description = Cleaning package cache...
 When = PostTransaction
-Exec = /usr/bin/paccache -ru
+Exec = /usr/bin/paccache -r -k 3

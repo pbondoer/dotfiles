@@ -1,0 +1,9 @@
+[Trigger]
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Removing old package cache...
+When = PostTransaction
+Exec = /usr/bin/paccache -r -u -k 0
