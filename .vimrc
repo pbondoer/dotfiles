@@ -142,6 +142,9 @@ if exists('+relativenumber')
   autocmd InsertLeave * :set rnu
 endif
 
+" temporary fix for weird typescript syntax highlighting
+autocmd FileType typescript syntax sync lines=20
+
 " plugin: rainbow parantheses
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
