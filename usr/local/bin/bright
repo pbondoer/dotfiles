@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# ---------------------------------------------------------------------------- #
+# @name          bright
+# @description   Brightness control with notifications
+# @author        pbondoer
+# @dependencies  brightnessctl, notify-send
+# @license       WTFPL
+# ---------------------------------------------------------------------------- #
+
+DELTA=5
+
+if [ ! -z $1 ]
+then
+  TYPE=$(echo $1 | tr "[:upper:]" "[:lower:]")
+else
+  echo "usage: bright <up | down>"
+  exit
+fi
+
+case $TYPE in
+  up)
+    VALUE="$DELTA%+"
+    ;;
+  down)
+    VALUE="$DELTA%-"
+    ;;
+  *)
+    echo "usage: bright <up | down>"
+    exit
+    ;;
+esac
+
+BRIGHTNESS=$(brightnessctl set $VALUE -m)
+
+if [ $? -eq 1 ]
+then
+  exit 0
+fi
+
+DEVICE=$(echo $BRIGHTNESS | cut -d"," -f1)
+VALUE=$(echo $BRIGHTNESS | cut -d"," -f4 | tr -d "%")
+
+notify-send -a "$DEVICE" "Brightness $TYPE" -h int:value:$VALUE -h string:synchronous:brightness
