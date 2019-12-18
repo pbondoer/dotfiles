@@ -198,7 +198,7 @@ then
     echo "   .........   -.- mm    "
   fi
 
-  curl -s "wttr.in/Paris, France?0Q" --max-time 1 > $wttr
+  curl -s "wttr.in/Paris?0Q" --max-time 1 > $wttr
 
   tput rc # reset cursor
   tput ed # clear everything
