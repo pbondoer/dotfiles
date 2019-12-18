@@ -252,10 +252,14 @@ if [ $OS = "Linux" ]
 then
   # yay -S zsh-syntax-highlighting
   source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  # yay -S zsh-autosuggestions
+  source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 elif [ $OS = "Darwin" ]
 then
   # brew install zsh-syntax-highlighting
   source /Users/$USER/.brew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  # brew install zsh-autosuggestions
+  source /Users/$USER/.brew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
 # ssh-agent
