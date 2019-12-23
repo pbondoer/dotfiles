@@ -204,7 +204,8 @@ then
   tput ed # clear everything
 fi
 
-if [[ -f $wttr ]]
+# if exists and > 0
+if [[ -s $wttr ]]
 then
   cat $wttr
   echo ""
