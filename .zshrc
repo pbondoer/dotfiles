@@ -263,6 +263,9 @@ then
   source /Users/$USER/.brew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 fi
 
+# config for zsh-autosuggestions
+ZSH_AUTOSUGGEST_STRATEGY=(match_prev_cmd history completion)
+
 # ssh-agent
 if ! pgrep -u "$USER" ssh-agent > /dev/null; then
   ssh-agent > ~/.ssh-agent
