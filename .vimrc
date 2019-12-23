@@ -142,9 +142,6 @@ if exists('+relativenumber')
   autocmd InsertLeave * :set rnu
 endif
 
-" temporary fix for weird typescript syntax highlighting
-autocmd FileType typescript syntax sync lines=20
-
 " plugin: rainbow parantheses
 au VimEnter * RainbowParenthesesToggle
 au Syntax * RainbowParenthesesLoadRound
@@ -177,7 +174,7 @@ let g:javascript_plugin_jsdoc = 1
 let g:vim_jsx_pretty_colorful_config = 1
 
 " polyglot
-let g:polyglot_disabled = ['markdown', 'jsx', 'rust', 'toml']
+let g:polyglot_disabled = ['markdown', 'typescript', 'jsx', 'rust', 'toml']
 
 " pretty colors
 if !empty(globpath(&rtp, 'colors/molokai.vim'))
@@ -197,7 +194,7 @@ let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %severity% > %s'
 let g:ale_linters = {
       \   'javascript': ['eslint', 'flow'],
-      \   'typescript': ['tslint'],
+      \   'typescript': ['tsserver', 'tslint'],
       \   'markdown': ['markdownlint'],
       \   'rust': ['rls', 'cargo'],
       \   'bash': ['shellcheck'],
