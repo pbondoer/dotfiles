@@ -124,9 +124,6 @@ export EDITOR="nvim"
 export GPG_TTY=$(tty)
 export CLICOLOR=1
 
-# workplace
-export WORK_ENV="ledger"
-
 # prompt
 P_EXIT='%(?..%F{red} [%?]%f)'
 P_ENV='%F{blue} [${ENV}]%f'
